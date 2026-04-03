@@ -1,2 +1,3 @@
 google.com, pub-4094409527749778, DIRECT, f08c47fec0942fa0
 ironsource.com, 283189, DIRECT, f08c47fec0942fa0
+vungle.com, 69cf63079233d7bb42290d19, DIRECT, c107d686becd2d77
