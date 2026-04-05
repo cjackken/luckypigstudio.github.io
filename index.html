@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>BaoTio – Your Daily Lucky Number | Lucky Pig Studio</title>
-  <meta name="description" content="BaoTio generates your unique daily lucky number for Singapore 4D. Every number is exclusively yours – no two users get the same number each day."/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lucky Pig Studio – BaoTio &amp; HIT 1000</title>
+  <meta name="description"
+    content="Lucky Pig Studio presents BaoTio — your exclusive daily lucky number for Singapore 4D &amp; Toto — and HIT 1000, the addictive one-tap tapping game. Unique numbers every day + high-score thrills. Download both now!" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700;900&family=Cinzel+Decorative:wght@700;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700;900&amp;family=Cinzel+Decorative:wght@700;900&amp;family=Lato:wght@300;400;700&amp;display=swap"
+    rel="stylesheet">
   <style>
     :root {
       --red: #C8102E;
@@ -19,11 +23,19 @@
       --cream: #FFF8E7;
       --text-dark: #1a0a00;
       --text-light: #fff8e7;
+      --hit-purple: #6B3FBF;
+      --hit-cyan: #00E5FF;
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-    html { scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+    }
 
     body {
       font-family: 'Lato', sans-serif;
@@ -38,8 +50,8 @@
       position: fixed;
       inset: 0;
       background-image:
-        radial-gradient(circle at 20% 20%, rgba(255,215,0,0.06) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(255,215,0,0.06) 0%, transparent 50%),
+        radial-gradient(circle at 20% 20%, rgba(255, 215, 0, 0.06) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(255, 215, 0, 0.06) 0%, transparent 50%),
         url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23FFD700' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
       pointer-events: none;
       z-index: 0;
@@ -48,15 +60,17 @@
     /* ── NAV ── */
     nav {
       position: fixed;
-      top: 0; left: 0; right: 0;
+      top: 0;
+      left: 0;
+      right: 0;
       z-index: 100;
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 1rem 2.5rem;
-      background: rgba(139,0,0,0.85);
+      background: rgba(139, 0, 0, 0.85);
       backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(255,215,0,0.2);
+      border-bottom: 1px solid rgba(255, 215, 0, 0.2);
     }
 
     .nav-logo {
@@ -65,6 +79,9 @@
       color: var(--gold);
       text-decoration: none;
       letter-spacing: 0.05em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
     .nav-logo span {
@@ -85,7 +102,7 @@
     }
 
     nav ul a {
-      color: rgba(255,248,231,0.8);
+      color: rgba(255, 248, 231, 0.8);
       text-decoration: none;
       font-size: 0.85rem;
       letter-spacing: 0.1em;
@@ -93,7 +110,9 @@
       transition: color 0.2s;
     }
 
-    nav ul a:hover { color: var(--gold); }
+    nav ul a:hover {
+      color: var(--gold);
+    }
 
     /* ── HERO ── */
     .hero {
@@ -110,10 +129,10 @@
     .hero-bg {
       position: absolute;
       inset: 0;
-      background: radial-gradient(ellipse at 50% 0%, rgba(200,16,46,0.8) 0%, rgba(139,0,0,0.95) 70%);
+      background: radial-gradient(ellipse at 50% 0%, rgba(200, 16, 46, 0.8) 0%, rgba(139, 0, 0, 0.95) 70%);
     }
 
-    /* Decorative lanterns */
+    /* Decorative lanterns + HIT 1000 sparkles */
     .lantern {
       position: absolute;
       width: 60px;
@@ -121,12 +140,27 @@
       opacity: 0.6;
       animation: sway 4s ease-in-out infinite;
     }
-    .lantern-left { left: 5%; animation-delay: 0s; }
-    .lantern-right { right: 5%; animation-delay: 2s; }
+
+    .lantern-left {
+      left: 5%;
+      animation-delay: 0s;
+    }
+
+    .lantern-right {
+      right: 5%;
+      animation-delay: 2s;
+    }
 
     @keyframes sway {
-      0%, 100% { transform: rotate(-5deg); }
-      50% { transform: rotate(5deg); }
+
+      0%,
+      100% {
+        transform: rotate(-5deg);
+      }
+
+      50% {
+        transform: rotate(5deg);
+      }
     }
 
     .hero-inner {
@@ -140,7 +174,7 @@
       width: 100%;
     }
 
-    .hero-text { }
+    .hero-text {}
 
     .hero-eyebrow {
       font-family: 'Lato', sans-serif;
@@ -155,20 +189,19 @@
 
     .hero-title {
       font-family: 'Cinzel Decorative', serif;
-      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-size: clamp(2.5rem, 5vw, 4.2rem);
       line-height: 1.1;
       color: var(--gold);
-      text-shadow: 0 2px 20px rgba(255,215,0,0.3);
+      text-shadow: 0 2px 20px rgba(255, 215, 0, 0.3);
       margin-bottom: 0.5rem;
       opacity: 0;
       animation: fadeUp 0.8s 0.4s forwards;
     }
 
-    .hero-subtitle-cn {
-      font-family: 'Noto Serif SC', serif;
-      font-size: 1.5rem;
-      color: rgba(255,248,231,0.7);
-      margin-bottom: 1.5rem;
+    .hero-subtitle {
+      font-size: 1.4rem;
+      color: #fff;
+      margin-bottom: 1rem;
       opacity: 0;
       animation: fadeUp 0.8s 0.5s forwards;
     }
@@ -176,14 +209,16 @@
     .hero-desc {
       font-size: 1.05rem;
       line-height: 1.8;
-      color: rgba(255,248,231,0.85);
+      color: rgba(255, 248, 231, 0.85);
       max-width: 480px;
       margin-bottom: 2.5rem;
       opacity: 0;
       animation: fadeUp 0.8s 0.6s forwards;
     }
 
-    .hero-desc strong { color: var(--gold); }
+    .hero-desc strong {
+      color: var(--gold);
+    }
 
     .download-buttons {
       display: flex;
@@ -191,6 +226,21 @@
       flex-wrap: wrap;
       opacity: 0;
       animation: fadeUp 0.8s 0.8s forwards;
+    }
+
+    .app-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .app-label {
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--gold);
+      text-transform: uppercase;
     }
 
     .btn-download {
@@ -209,21 +259,25 @@
     .btn-google {
       background: linear-gradient(135deg, var(--gold), #e6a800);
       color: var(--text-dark);
-      box-shadow: 0 4px 20px rgba(255,215,0,0.4);
+      box-shadow: 0 4px 20px rgba(255, 215, 0, 0.4);
     }
 
     .btn-apple {
-      background: rgba(255,255,255,0.1);
+      background: rgba(255, 255, 255, 0.1);
       color: var(--text-light);
-      border: 1px solid rgba(255,215,0,0.3);
+      border: 1px solid rgba(255, 215, 0, 0.3);
     }
 
     .btn-download:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 30px rgba(255,215,0,0.5);
+      box-shadow: 0 8px 30px rgba(255, 215, 0, 0.5);
     }
 
-    .btn-download svg { width: 20px; height: 20px; flex-shrink: 0; }
+    .btn-download svg {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+    }
 
     /* ── PHONE MOCKUPS ── */
     .hero-phones {
@@ -239,8 +293,8 @@
     .phone-mockup {
       width: 200px;
       border-radius: 32px;
-      border: 3px solid rgba(255,215,0,0.4);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,215,0,0.1);
+      border: 3px solid rgba(255, 215, 0, 0.4);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 215, 0, 0.1);
       overflow: hidden;
       background: #111;
     }
@@ -251,32 +305,12 @@
       display: block;
     }
 
-    .phone-mockup.front {
-      z-index: 2;
-      transform: translateY(0) rotate(0deg);
-    }
-
-    .phone-mockup.back-left {
-      z-index: 1;
-      transform: translateX(30px) rotate(-8deg) translateY(20px);
-      opacity: 0.7;
-      width: 170px;
-    }
-
-    .phone-mockup.back-right {
-      z-index: 1;
-      transform: translateX(-30px) rotate(8deg) translateY(20px);
-      opacity: 0.7;
-      width: 170px;
-    }
-
-    /* Gold divider */
-    .gold-divider {
+    /* ── APP SEPARATOR ── */
+    .app-divider {
       width: 100%;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, var(--gold), var(--gold-dark), var(--gold), transparent);
-      position: relative;
-      z-index: 1;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--gold), var(--hit-cyan), var(--gold), transparent);
+      margin: 3rem 0;
     }
 
     /* ── FEATURES ── */
@@ -305,13 +339,13 @@
       font-family: 'Cinzel Decorative', serif;
       font-size: clamp(1.8rem, 3vw, 2.8rem);
       color: var(--gold);
-      text-shadow: 0 2px 15px rgba(255,215,0,0.2);
+      text-shadow: 0 2px 15px rgba(255, 215, 0, 0.2);
     }
 
     .section-title-cn {
       font-family: 'Noto Serif SC', serif;
       font-size: 1.1rem;
-      color: rgba(255,248,231,0.6);
+      color: rgba(255, 248, 231, 0.6);
       margin-top: 0.5rem;
     }
 
@@ -324,8 +358,8 @@
     }
 
     .feature-card {
-      background: rgba(255,215,0,0.05);
-      border: 1px solid rgba(255,215,0,0.15);
+      background: rgba(255, 215, 0, 0.05);
+      border: 1px solid rgba(255, 215, 0, 0.15);
       border-radius: 20px;
       padding: 2rem;
       transition: transform 0.3s, background 0.3s, border-color 0.3s;
@@ -336,7 +370,9 @@
     .feature-card::before {
       content: '';
       position: absolute;
-      top: 0; left: 0; right: 0;
+      top: 0;
+      left: 0;
+      right: 0;
       height: 2px;
       background: linear-gradient(90deg, transparent, var(--gold), transparent);
       opacity: 0;
@@ -345,11 +381,13 @@
 
     .feature-card:hover {
       transform: translateY(-4px);
-      background: rgba(255,215,0,0.08);
-      border-color: rgba(255,215,0,0.3);
+      background: rgba(255, 215, 0, 0.08);
+      border-color: rgba(255, 215, 0, 0.3);
     }
 
-    .feature-card:hover::before { opacity: 1; }
+    .feature-card:hover::before {
+      opacity: 1;
+    }
 
     .feature-icon {
       font-size: 2.5rem;
@@ -367,14 +405,24 @@
     .feature-title-cn {
       font-family: 'Noto Serif SC', serif;
       font-size: 0.85rem;
-      color: rgba(255,248,231,0.5);
+      color: rgba(255, 248, 231, 0.5);
       margin-bottom: 0.8rem;
     }
 
     .feature-desc {
       font-size: 0.9rem;
       line-height: 1.7;
-      color: rgba(255,248,231,0.75);
+      color: rgba(255, 248, 231, 0.75);
+    }
+
+    /* HIT 1000 specific card styling */
+    .hit-card {
+      background: linear-gradient(135deg, rgba(107, 63, 191, 0.1), rgba(0, 229, 255, 0.1));
+      border-color: rgba(0, 229, 255, 0.3);
+    }
+
+    .hit-card .feature-title {
+      color: var(--hit-cyan);
     }
 
     /* ── SCREENSHOTS ── */
@@ -382,7 +430,7 @@
       position: relative;
       z-index: 1;
       padding: 6rem 2rem;
-      background: rgba(0,0,0,0.2);
+      background: rgba(0, 0, 0, 0.2);
       overflow: hidden;
     }
 
@@ -399,21 +447,23 @@
       flex-wrap: wrap;
     }
 
-    .screenshots-scroll::-webkit-scrollbar { display: none; }
+    .screenshots-scroll::-webkit-scrollbar {
+      display: none;
+    }
 
     .screenshot-item {
       flex-shrink: 0;
       width: 180px;
       border-radius: 24px;
       overflow: hidden;
-      border: 2px solid rgba(255,215,0,0.3);
-      box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+      border: 2px solid rgba(255, 215, 0, 0.3);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
       transition: transform 0.3s, box-shadow 0.3s;
     }
 
     .screenshot-item:hover {
       transform: translateY(-8px) scale(1.02);
-      box-shadow: 0 20px 60px rgba(255,215,0,0.2);
+      box-shadow: 0 20px 60px rgba(255, 215, 0, 0.2);
     }
 
     .screenshot-item img {
@@ -428,8 +478,8 @@
       z-index: 1;
       padding: 5rem 2rem;
       background: linear-gradient(135deg, #8B0000, #C8102E);
-      border-top: 1px solid rgba(255,215,0,0.2);
-      border-bottom: 1px solid rgba(255,215,0,0.2);
+      border-top: 1px solid rgba(255, 215, 0, 0.2);
+      border-bottom: 1px solid rgba(255, 215, 0, 0.2);
     }
 
     .stats-grid {
@@ -445,7 +495,7 @@
       font-family: 'Cinzel Decorative', serif;
       font-size: 3rem;
       color: var(--gold);
-      text-shadow: 0 2px 20px rgba(255,215,0,0.4);
+      text-shadow: 0 2px 20px rgba(255, 215, 0, 0.4);
       line-height: 1;
       margin-bottom: 0.5rem;
     }
@@ -454,13 +504,13 @@
       font-size: 0.8rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: rgba(255,248,231,0.7);
+      color: rgba(255, 248, 231, 0.7);
     }
 
     .stat-label-cn {
       font-family: 'Noto Serif SC', serif;
       font-size: 0.9rem;
-      color: rgba(255,248,231,0.5);
+      color: rgba(255, 248, 231, 0.5);
       margin-top: 0.25rem;
     }
 
@@ -483,13 +533,13 @@
     .cta-subtitle {
       font-family: 'Noto Serif SC', serif;
       font-size: 1.1rem;
-      color: rgba(255,248,231,0.6);
+      color: rgba(255, 248, 231, 0.6);
       margin-bottom: 1rem;
     }
 
     .cta-desc {
       font-size: 1rem;
-      color: rgba(255,248,231,0.75);
+      color: rgba(255, 248, 231, 0.75);
       max-width: 500px;
       margin: 0 auto 2.5rem;
       line-height: 1.7;
@@ -499,8 +549,8 @@
     footer {
       position: relative;
       z-index: 1;
-      background: rgba(0,0,0,0.4);
-      border-top: 1px solid rgba(255,215,0,0.15);
+      background: rgba(0, 0, 0, 0.4);
+      border-top: 1px solid rgba(255, 215, 0, 0.15);
       padding: 3rem 2rem 2rem;
     }
 
@@ -522,7 +572,7 @@
 
     .footer-brand-desc {
       font-size: 0.85rem;
-      color: rgba(255,248,231,0.55);
+      color: rgba(255, 248, 231, 0.55);
       line-height: 1.7;
       max-width: 280px;
     }
@@ -535,24 +585,30 @@
       margin-bottom: 1.2rem;
     }
 
-    .footer-col ul { list-style: none; }
+    .footer-col ul {
+      list-style: none;
+    }
 
-    .footer-col ul li { margin-bottom: 0.6rem; }
+    .footer-col ul li {
+      margin-bottom: 0.6rem;
+    }
 
     .footer-col ul a {
-      color: rgba(255,248,231,0.6);
+      color: rgba(255, 248, 231, 0.6);
       text-decoration: none;
       font-size: 0.9rem;
       transition: color 0.2s;
     }
 
-    .footer-col ul a:hover { color: var(--gold); }
+    .footer-col ul a:hover {
+      color: var(--gold);
+    }
 
     .footer-bottom {
       max-width: 1100px;
       margin: 0 auto;
       padding-top: 2rem;
-      border-top: 1px solid rgba(255,215,0,0.1);
+      border-top: 1px solid rgba(255, 215, 0, 0.1);
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -562,11 +618,11 @@
 
     .footer-bottom p {
       font-size: 0.8rem;
-      color: rgba(255,248,231,0.4);
+      color: rgba(255, 248, 231, 0.4);
     }
 
     .footer-bottom a {
-      color: rgba(255,215,0,0.6);
+      color: rgba(255, 215, 0, 0.6);
       text-decoration: none;
     }
 
@@ -594,19 +650,29 @@
       margin: 2rem 0 0.8rem;
     }
 
-    .privacy-page p, .privacy-page li {
-      color: rgba(255,248,231,0.8);
+    .privacy-page p,
+    .privacy-page li {
+      color: rgba(255, 248, 231, 0.8);
       line-height: 1.8;
       font-size: 0.95rem;
       margin-bottom: 0.8rem;
     }
 
-    .privacy-page ul { padding-left: 1.5rem; }
+    .privacy-page ul {
+      padding-left: 1.5rem;
+    }
 
     /* ── ANIMATIONS ── */
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     /* ── RESPONSIVE ── */
@@ -617,327 +683,464 @@
         gap: 2.5rem;
       }
 
-      .hero-desc { margin: 0 auto 2rem; }
-      .download-buttons { justify-content: center; }
-      .hero-phones { order: -1; }
-      .phone-mockup.back-left, .phone-mockup.back-right { display: none; }
-      .phone-mockup.front { width: 220px; }
+      .hero-desc {
+        margin: 0 auto 2rem;
+      }
+
+      .download-buttons {
+        justify-content: center;
+      }
+
+      .hero-phones {
+        order: -1;
+      }
+
+      .phone-mockup.back-left,
+      .phone-mockup.back-right {
+        display: none;
+      }
+
+      .phone-mockup.front {
+        width: 220px;
+      }
 
       .footer-inner {
         grid-template-columns: 1fr;
         gap: 2rem;
       }
 
-      nav ul { display: none; }
+      nav ul {
+        display: none;
+      }
     }
 
-    /* Gold coin decoration */
     .coin-decoration {
       display: inline-block;
       width: 8px;
       height: 8px;
       border-radius: 50%;
       background: var(--gold);
-      box-shadow: 0 0 8px rgba(255,215,0,0.6);
+      box-shadow: 0 0 8px rgba(255, 215, 0, 0.6);
       margin: 0 8px;
       vertical-align: middle;
     }
+
+    /* HIT 1000 hero accent */
+    .hit-accent {
+      color: var(--hit-cyan);
+      text-shadow: 0 0 15px var(--hit-cyan);
+    }
   </style>
 </head>
+
 <body>
 
-<!-- NAV -->
-<nav>
-  <a href="#" class="nav-logo" onclick="showHome()">
-    BaoTio
-    <span>by Lucky Pig Studio</span>
-  </a>
-  <ul>
-    <li><a href="#features">Features</a></li>
-    <li><a href="#screenshots">Screenshots</a></li>
-    <li><a href="#download">Download</a></li>
-    <li><a href="#" onclick="showPrivacy(); return false;">Privacy</a></li>
-    <li><a href="mailto:support@luckypigstudio.com">Support</a></li>
-  </ul>
-</nav>
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo" onclick="showHome()">
+      🐷 Lucky Pig Studio
+      <span>BaoTio • HIT 1000</span>
+    </a>
+    <ul>
+      <li><a href="#baotio">BaoTio</a></li>
+      <li><a href="#hit1000">HIT 1000</a></li>
+      <li><a href="#screenshots">Screenshots</a></li>
+      <li><a href="#" onclick="showPrivacy(); return false;">Privacy</a></li>
+      <li><a href="mailto:support@luckypigstudio.com">Support</a></li>
+    </ul>
+  </nav>
 
-<!-- MAIN PAGE -->
-<div id="main-content">
+  <!-- MAIN PAGE -->
+  <div id="main-content">
 
-  <!-- HERO -->
-  <section class="hero" id="home">
-    <div class="hero-bg"></div>
+    <!-- HERO -->
+    <section class="hero" id="home">
+      <div class="hero-bg"></div>
 
-    <!-- Decorative SVG lanterns -->
-    <svg class="lantern lantern-left" viewBox="0 0 60 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect x="22" y="0" width="16" height="8" rx="3" fill="#8B0000"/>
-      <ellipse cx="30" cy="65" rx="22" ry="45" fill="#C8102E"/>
-      <ellipse cx="30" cy="65" rx="22" ry="45" fill="url(#lg1)" opacity="0.5"/>
-      <line x1="30" y1="10" x2="30" y2="20" stroke="#B8860B" stroke-width="2"/>
-      <line x1="10" y1="40" x2="50" y2="40" stroke="rgba(255,215,0,0.3)" stroke-width="1"/>
-      <line x1="8" y1="65" x2="52" y2="65" stroke="rgba(255,215,0,0.3)" stroke-width="1"/>
-      <line x1="10" y1="90" x2="50" y2="90" stroke="rgba(255,215,0,0.3)" stroke-width="1"/>
-      <ellipse cx="30" cy="108" rx="8" ry="4" fill="#B8860B"/>
-      <line x1="26" y1="112" x2="24" y2="120" stroke="#B8860B" stroke-width="2"/>
-      <line x1="30" y1="112" x2="30" y2="120" stroke="#B8860B" stroke-width="2"/>
-      <line x1="34" y1="112" x2="36" y2="120" stroke="#B8860B" stroke-width="2"/>
-      <defs>
-        <linearGradient id="lg1" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%" stop-color="rgba(255,255,255,0.2)"/>
-          <stop offset="50%" stop-color="rgba(255,255,255,0)"/>
-          <stop offset="100%" stop-color="rgba(0,0,0,0.2)"/>
-        </linearGradient>
-      </defs>
-    </svg>
+      <!-- Decorative lanterns -->
+      <svg class="lantern lantern-left" viewBox="0 0 60 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="22" y="0" width="16" height="8" rx="3" fill="#8B0000" />
+        <ellipse cx="30" cy="65" rx="22" ry="45" fill="#C8102E" />
+        <ellipse cx="30" cy="65" rx="22" ry="45" fill="url(#lg1)" opacity="0.5" />
+        <line x1="30" y1="10" x2="30" y2="20" stroke="#B8860B" stroke-width="2" />
+        <line x1="10" y1="40" x2="50" y2="40" stroke="rgba(255,215,0,0.3)" stroke-width="1" />
+        <line x1="8" y1="65" x2="52" y2="65" stroke="rgba(255,215,0,0.3)" stroke-width="1" />
+        <line x1="10" y1="90" x2="50" y2="90" stroke="rgba(255,215,0,0.3)" stroke-width="1" />
+        <ellipse cx="30" cy="108" rx="8" ry="4" fill="#B8860B" />
+        <line x1="26" y1="112" x2="24" y2="120" stroke="#B8860B" stroke-width="2" />
+        <line x1="30" y1="112" x2="30" y2="120" stroke="#B8860B" stroke-width="2" />
+        <line x1="34" y1="112" x2="36" y2="120" stroke="#B8860B" stroke-width="2" />
+        <defs>
+          <linearGradient id="lg1" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="rgba(255,255,255,0.2)" />
+            <stop offset="50%" stop-color="rgba(255,255,255,0)" />
+            <stop offset="100%" stop-color="rgba(0,0,0,0.2)" />
+          </linearGradient>
+        </defs>
+      </svg>
 
-    <svg class="lantern lantern-right" viewBox="0 0 60 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect x="22" y="0" width="16" height="8" rx="3" fill="#8B0000"/>
-      <ellipse cx="30" cy="65" rx="22" ry="45" fill="#C8102E"/>
-      <line x1="30" y1="10" x2="30" y2="20" stroke="#B8860B" stroke-width="2"/>
-      <line x1="10" y1="40" x2="50" y2="40" stroke="rgba(255,215,0,0.3)" stroke-width="1"/>
-      <line x1="8" y1="65" x2="52" y2="65" stroke="rgba(255,215,0,0.3)" stroke-width="1"/>
-      <line x1="10" y1="90" x2="50" y2="90" stroke="rgba(255,215,0,0.3)" stroke-width="1"/>
-      <ellipse cx="30" cy="108" rx="8" ry="4" fill="#B8860B"/>
-      <line x1="26" y1="112" x2="24" y2="120" stroke="#B8860B" stroke-width="2"/>
-      <line x1="30" y1="112" x2="30" y2="120" stroke="#B8860B" stroke-width="2"/>
-      <line x1="34" y1="112" x2="36" y2="120" stroke="#B8860B" stroke-width="2"/>
-    </svg>
+      <svg class="lantern lantern-right" viewBox="0 0 60 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="22" y="0" width="16" height="8" rx="3" fill="#8B0000" />
+        <ellipse cx="30" cy="65" rx="22" ry="45" fill="#C8102E" />
+        <line x1="30" y1="10" x2="30" y2="20" stroke="#B8860B" stroke-width="2" />
+        <line x1="10" y1="40" x2="50" y2="40" stroke="rgba(255,215,0,0.3)" stroke-width="1" />
+        <line x1="8" y1="65" x2="52" y2="65" stroke="rgba(255,215,0,0.3)" stroke-width="1" />
+        <line x1="10" y1="90" x2="50" y2="90" stroke="rgba(255,215,0,0.3)" stroke-width="1" />
+        <ellipse cx="30" cy="108" rx="8" ry="4" fill="#B8860B" />
+        <line x1="26" y1="112" x2="24" y2="120" stroke="#B8860B" stroke-width="2" />
+        <line x1="30" y1="112" x2="30" y2="120" stroke="#B8860B" stroke-width="2" />
+        <line x1="34" y1="112" x2="36" y2="120" stroke="#B8860B" stroke-width="2" />
+      </svg>
 
-    <div class="hero-inner">
-      <div class="hero-text">
-        <!-- <p class="hero-eyebrow">🐷 Lucky Pig Studio Presents</p> -->
-        <h1 class="hero-title">BaoTio</h1>
-        <p class="hero-subtitle-cn">包Tio — 你的幸运数字</p>
-        <p class="hero-desc">
-          Your <strong>exclusive daily lucky number</strong> for Singapore.
-          Every number is uniquely yours — once claimed, no other user gets the same number that day.
-          <br><br>
-          每天专属幸运号码，先到先得，绝不重复。
-        </p>
-        <div class="download-buttons" id="download">
-          <a href="https://play.google.com/store/apps/details?id=com.SuperBoringStudio.BaoTio" target="_blank" class="btn-download btn-google">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76c.33.18.7.22 1.06.1l12.74-7.36-2.73-2.73-11.07 9.99zM.5 1.7C.19 2.03 0 2.53 0 3.17v17.66c0 .64.19 1.14.5 1.47l.08.08 9.9-9.9v-.23L.58 1.62.5 1.7zm19.1 10.85l-2.6-1.5-2.98 2.98 2.98 2.98 2.62-1.51c.75-.43.75-1.13-.02-1.56v.01zM4.24.14L16.98 7.5l-2.73 2.73L4.18.24C4.5.07 4.87.1 5.22.27l-1-.13z"/></svg>
-            Google Play
-          </a>
-          <a href="#" class="btn-download btn-apple">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98l-.09.06c-.22.14-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.77M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-            App Store
-          </a>
+      <div class="hero-inner">
+        <div class="hero-text">
+          <p class="hero-eyebrow">🐷 Lucky Pig Studio</p>
+          <h1 class="hero-title">BaoTio <span class="hit-accent">&amp;</span> HIT 1000</h1>
+          <p class="hero-subtitle">Lucky Numbers • Addictive Taps</p>
+          <p class="hero-desc">
+            Two completely different thrills from the same studio.<br>
+            <strong>BaoTio</strong> — your exclusive daily lucky number for Singapore 4D &amp; Toto.<br>
+            <strong>HIT 1000</strong> — the ultra-satisfying one-tap tapping game with perfect combos, massive
+            multipliers, and sky-high scores.
+            <br><br>
+            每天专属幸运号码 + 击中高分的快感
+          </p>
+
+          <div class="download-buttons">
+            <!-- BaoTio -->
+            <div class="app-group">
+              <div class="app-label">BaoTio</div>
+              <a href="https://play.google.com/store/apps/details?id=com.SuperBoringStudio.BaoTio" target="_blank"
+                class="btn-download btn-google">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M3.18 23.76c.33.18.7.22 1.06.1l12.74-7.36-2.73-2.73-11.07 9.99zM.5 1.7C.19 2.03 0 2.53 0 3.17v17.66c0 .64.19 1.14.5 1.47l.08.08 9.9-9.9v-.23L.58 1.62.5 1.7zm19.1 10.85l-2.6-1.5-2.98 2.98 2.98 2.98 2.62-1.51c.75-.43.75-1.13-.02-1.56v.01zM4.24.14L16.98 7.5l-2.73 2.73L4.18.24C4.5.07 4.87.1 5.22.27l-1-.13z" />
+                </svg>
+                Google Play
+              </a>
+              <a href="#" class="btn-download btn-apple">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98l-.09.06c-.22.14-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.77M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
+                </svg>
+                App Store (Soon)
+              </a>
+            </div>
+
+            <!-- HIT 1000 -->
+            <div class="app-group">
+              <div class="app-label">HIT 1000</div>
+              <a href="https://apps.apple.com/us/app/hit-1000/id1503987014" target="_blank"
+                class="btn-download btn-apple">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98l-.09.06c-.22.14-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.77M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
+                </svg>
+                App Store
+              </a>
+              <a href="#" class="btn-download btn-google">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M3.18 23.76c.33.18.7.22 1.06.1l12.74-7.36-2.73-2.73-11.07 9.99zM.5 1.7C.19 2.03 0 2.53 0 3.17v17.66c0 .64.19 1.14.5 1.47l.08.08 9.9-9.9v-.23L.58 1.62.5 1.7zm19.1 10.85l-2.6-1.5-2.98 2.98 2.98 2.98 2.62-1.51c.75-.43.75-1.13-.02-1.56v.01zM4.24.14L16.98 7.5l-2.73 2.73L4.18.24C4.5.07 4.87.1 5.22.27l-1-.13z" />
+                </svg>
+                Google Play (Coming Soon)
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Phone mockups (BaoTio on left, HIT 1000 collage on right) -->
+        <div class="hero-phones" style="gap: 40px;">
+          <div class="phone-mockup front" style="width: 190px;">
+            <img src="screenshots/screen4.png" alt="BaoTio lucky number result"
+              onerror="this.style.background='#2a0a0a';this.style.minHeight='400px'" />
+          </div>
+          <div class="phone-mockup"
+            style="width: 210px; border-color: #00E5FF; box-shadow: 0 20px 60px rgba(0,229,255,0.4);">
+            <img src="screenshots/hit-screens.png" alt="HIT 1000 gameplay screens"
+              onerror="this.style.background='#2a0a0a';this.style.minHeight='420px'; content: 'Add your HIT 1000 4-screen collage here (the image you attached)';" />
+          </div>
         </div>
       </div>
+    </section>
 
-      <div class="hero-phones">
-        <div class="phone-mockup back-left">
-          <img src="screenshots/screen1.png" alt="BaoTio out of numbers screen" onerror="this.style.background='#2a0a0a';this.style.minHeight='350px'"/>
+    <div class="app-divider"></div>
+
+    <!-- BAOTIO SECTION -->
+    <section class="features" id="baotio">
+      <div class="section-header">
+        <span class="section-tag"><span class="coin-decoration"></span>BaoTio<span
+            class="coin-decoration"></span></span>
+        <h2 class="section-title">Your Exclusive Daily Lucky Number</h2>
+        <p class="section-title-cn">包Tio — 你的幸运数字</p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <h3 class="feature-title">Truly Unique Numbers</h3>
+          <p class="feature-title-cn">真正专属号码</p>
+          <p class="feature-desc">From a daily pool of 10,000 numbers (0000–9999), each user receives an exclusive
+            number. Once yours is claimed, no one else gets it that day.</p>
         </div>
-        <div class="phone-mockup front">
-          <img src="screenshots/screen4.png" alt="BaoTio lucky number result" onerror="this.style.background='#2a0a0a';this.style.minHeight='400px'"/>
+        <div class="feature-card">
+          <h3 class="feature-title">4D &amp; Toto Ready</h3>
+          <p class="feature-title-cn">支持4D和多多</p>
+          <p class="feature-desc">Generate lucky numbers for both Singapore 4D and Toto formats. Choose your game and
+            let fate decide your fortune.</p>
         </div>
-        <div class="phone-mockup back-right">
-          <img src="screenshots/screen3.png" alt="BaoTio main screen" onerror="this.style.background='#2a0a0a';this.style.minHeight='350px'"/>
+        <div class="feature-card">
+          <h3 class="feature-title">Auspicious Mascot</h3>
+          <p class="feature-title-cn">吉祥财神爷</p>
+          <p class="feature-desc">Guided by the god of wealth — symbol of wealth and abundance in Chinese culture — your
+            daily number comes with blessings of prosperity.</p>
+        </div>
+        <div class="feature-card">
+          <h3 class="feature-title">Previous Numbers</h3>
+          <p class="feature-title-cn">历史号码记录</p>
+          <p class="feature-desc">Your full history of lucky numbers is saved locally. Never forget a number you played
+            — track them all with timestamps.</p>
+        </div>
+        <div class="feature-card">
+          <h3 class="feature-title">Bilingual</h3>
+          <p class="feature-title-cn">中英双语界面</p>
+          <p class="feature-desc">Full support for English and Chinese. Switch languages seamlessly to enjoy BaoTio in
+            your preferred language.</p>
+        </div>
+        <div class="feature-card">
+          <h3 class="feature-title">One More Number</h3>
+          <p class="feature-title-cn">再来一次</p>
+          <p class="feature-desc">Want another shot at luck? Watch a short video ad to unlock an additional exclusive
+            number — still unique, still yours alone.</p>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <div class="gold-divider"></div>
+    <div class="app-divider"></div>
 
-  <!-- FEATURES -->
-  <section class="features" id="features">
-    <div class="section-header">
-      <span class="section-tag"><span class="coin-decoration"></span>Why BaoTio<span class="coin-decoration"></span></span>
-      <h2 class="section-title">Your Lucky Edge</h2>
-      <p class="section-title-cn">专属幸运，每日更新</p>
-    </div>
-
-    <div class="features-grid">
-      <div class="feature-card">
-        <!-- <span class="feature-icon">🔢</span> -->
-        <h3 class="feature-title">Truly Unique Numbers</h3>
-        <p class="feature-title-cn">真正专属号码</p>
-        <p class="feature-desc">From a daily pool of 10,000 numbers (0000–9999), each user receives an exclusive number. Once yours is claimed, no one else gets it that day.</p>
+    <!-- HIT 1000 SECTION -->
+    <section class="features" id="hit1000" style="background: linear-gradient(180deg, #3F2A6B 0%, #1A1433 100%);">
+      <div class="section-header">
+        <span class="section-tag" style="color: #00E5FF;"><span class="coin-decoration"
+            style="background:#00E5FF;"></span>HIT 1000<span class="coin-decoration"
+            style="background:#00E5FF;"></span></span>
+        <h2 class="section-title" style="color: #00E5FF;">Tap. Perfect. Score BIG.</h2>
+        <p class="section-title-cn" style="color: rgba(0,229,255,0.7);">击中 1000 • 完美连击 • 高分狂飙</p>
       </div>
-      <div class="feature-card">
-        <!-- <span class="feature-icon">🎯</span> -->
-        <h3 class="feature-title">4D &amp; Toto Ready</h3>
-        <p class="feature-title-cn">支持4D和多多</p>
-        <p class="feature-desc">Generate lucky numbers for both Singapore 4D and Toto formats. Choose your game and let fate decide your fortune.</p>
+
+      <div class="features-grid">
+        <div class="feature-card hit-card">
+          <h3 class="feature-title">One-Tap Addiction</h3>
+          <p class="feature-title-cn">超简单一键玩法</p>
+          <p class="feature-desc">Tap the glowing orb at the perfect moment. Every hit multiplies your score — 1000,
+            10000… the sky’s the limit!</p>
+        </div>
+        <div class="feature-card hit-card">
+          <h3 class="feature-title">Perfect! Combos</h3>
+          <p class="feature-title-cn">完美击中奖励</p>
+          <p class="feature-desc">Land “Perfect!” hits for massive +10 bonuses and watch your score explode in beautiful
+            sparkles.</p>
+        </div>
+        <div class="feature-card hit-card">
+          <h3 class="feature-title">Chase Your High Score</h3>
+          <p class="feature-title-cn">打破纪录</p>
+          <p class="feature-desc">Beat your personal best every day. The beautiful gradient UI and satisfying feedback
+            make every session addictive.</p>
+        </div>
+        <div class="feature-card hit-card">
+          <h3 class="feature-title">Instant Restart</h3>
+          <p class="feature-title-cn">随时重来</p>
+          <p class="feature-desc">Missed it? Restart in one tap and go for an even higher score. No lives, no limits —
+            pure fun.</p>
+        </div>
+        <div class="feature-card hit-card">
+          <h3 class="feature-title">Stunning Visuals</h3>
+          <p class="feature-title-cn">炫酷星光特效</p>
+          <p class="feature-desc">Purple-to-cyan gradients, floating stars, and explosive particle effects make every
+            tap feel premium.</p>
+        </div>
+        <div class="feature-card hit-card">
+          <h3 class="feature-title">LevelPlay Ads Ready</h3>
+          <p class="feature-title-cn">已接入LevelPlay</p>
+          <p class="feature-desc">Watch a short rewarded video to keep the momentum going — more taps, more scores!</p>
+        </div>
       </div>
-      <div class="feature-card">
-        <!-- <span class="feature-icon">💰​</span> -->
-        <h3 class="feature-title">Auspicious Mascot</h3>
-        <p class="feature-title-cn">吉祥财神爷</p>
-        <p class="feature-desc">Guided by the god of wealth — symbol of wealth and abundance in Chinese culture — your daily number comes with blessings of prosperity.</p>
+    </section>
+
+    <div class="app-divider"></div>
+
+    <!-- SCREENSHOTS -->
+    <section class="screenshots" id="screenshots">
+      <div class="section-header">
+        <span class="section-tag"><span class="coin-decoration"></span>App Previews<span
+            class="coin-decoration"></span></span>
+        <h2 class="section-title">See Both Games in Action</h2>
+        <p class="section-title-cn">应用截图</p>
       </div>
-      <div class="feature-card">
-        <!-- <span class="feature-icon">📜</span> -->
-        <h3 class="feature-title">Previous Numbers</h3>
-        <p class="feature-title-cn">历史号码记录</p>
-        <p class="feature-desc">Your full history of lucky numbers is saved locally. Never forget a number you played — track them all with timestamps.</p>
+
+      <!-- BaoTio screenshots -->
+      <h3 style="text-align:center; margin-bottom:1rem; color:var(--gold); font-family:'Cinzel Decorative',serif;">
+        BaoTio</h3>
+      <div class="screenshots-scroll" style="margin-bottom: 4rem;">
+        <div class="screenshot-item"><img src="screenshots/screen3.png" alt="BaoTio home screen"
+            onerror="this.parentElement.style.background='#2a0a0a';this.parentElement.style.minHeight='360px'" /></div>
+        <div class="screenshot-item"><img src="screenshots/screen4.png" alt="BaoTio lucky number result"
+            onerror="this.parentElement.style.background='#2a0a0a';this.parentElement.style.minHeight='360px'" /></div>
+        <div class="screenshot-item"><img src="screenshots/screen7.png" alt="BaoTio Toto numbers"
+            onerror="this.parentElement.style.background='#2a0a0a';this.parentElement.style.minHeight='360px'" /></div>
+        <div class="screenshot-item"><img src="screenshots/screen1.png" alt="BaoTio out of numbers"
+            onerror="this.parentElement.style.background='#2a0a0a';this.parentElement.style.minHeight='360px'" /></div>
+        <div class="screenshot-item"><img src="screenshots/screen8.png" alt="BaoTio previous numbers"
+            onerror="this.parentElement.style.background='#2a0a0a';this.parentElement.style.minHeight='360px'" /></div>
       </div>
-      <div class="feature-card">
-        <!-- <span class="feature-icon">🌏</span> -->
-        <h3 class="feature-title">Bilingual</h3>
-        <p class="feature-title-cn">中英双语界面</p>
-        <p class="feature-desc">Full support for English and Chinese. Switch languages seamlessly to enjoy BaoTio in your preferred language.</p>
+
+      <!-- HIT 1000 screenshots -->
+      <h3 style="text-align:center; margin-bottom:1rem; color:#00E5FF; font-family:'Cinzel Decorative',serif;">HIT 1000
+      </h3>
+      <div class="screenshots-scroll">
+        <!-- You can replace the src below with individual HIT 1000 screenshots once you split the attached image -->
+        <div class="screenshot-item" style="width:380px; border-color:#00E5FF;">
+          <img src="screenshots/hit-screens.png" alt="HIT 1000 full gameplay collage (the image you attached)"
+            onerror="this.style.background='#1A1433';this.style.minHeight='360px'; content:'Place your attached HIT 1000 4-screen screenshot here';" />
+        </div>
+        <!-- Add more individual HIT 1000 screenshots here as you extract them -->
       </div>
-      <div class="feature-card">
-        <!-- <span class="feature-icon">🎬</span> -->
-        <h3 class="feature-title">One More Number</h3>
-        <p class="feature-title-cn">再来一次</p>
-        <p class="feature-desc">Want another shot at luck? Watch a short video ad to unlock an additional exclusive number — still unique, still yours alone.</p>
+    </section>
+
+    <!-- STATS -->
+    <section class="stats">
+      <div class="stats-grid">
+        <div>
+          <div class="stat-number">10K</div>
+          <div class="stat-label">Daily BaoTio Numbers</div>
+          <div class="stat-label-cn">每日专属号码</div>
+        </div>
+        <div>
+          <div class="stat-number">1000+</div>
+          <div class="stat-label">HIT 1000 Score Multipliers</div>
+          <div class="stat-label-cn">击中倍率</div>
+        </div>
+        <div>
+          <div class="stat-number">100%</div>
+          <div class="stat-label">Unique &amp; Addictive</div>
+          <div class="stat-label-cn">独一无二的乐趣</div>
+        </div>
+        <div>
+          <div class="stat-number">Free</div>
+          <div class="stat-label">Both Apps Always Free</div>
+          <div class="stat-label-cn">永久免费</div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <div class="gold-divider"></div>
-
-  <!-- SCREENSHOTS -->
-  <section class="screenshots" id="screenshots">
-    <div class="section-header">
-      <span class="section-tag"><span class="coin-decoration"></span>App Preview<span class="coin-decoration"></span></span>
-      <h2 class="section-title">See It In Action</h2>
-      <p class="section-title-cn">应用截图</p>
-    </div>
-    <div class="screenshots-scroll">
-      <div class="screenshot-item"><img src="screenshots/screen3.png" alt="BaoTio home screen" onerror="this.parentElement.style.background='#2a0a0a';this.parentElement.style.minHeight='360px'"/></div>
-      <div class="screenshot-item"><img src="screenshots/screen4.png" alt="Lucky number result" onerror="this.parentElement.style.background='#2a0a0a';this.parentElement.style.minHeight='360px'"/></div>
-      <div class="screenshot-item"><img src="screenshots/screen7.png" alt="Toto numbers" onerror="this.parentElement.style.background='#2a0a0a';this.parentElement.style.minHeight='360px'"/></div>
-      <div class="screenshot-item"><img src="screenshots/screen1.png" alt="Out of numbers" onerror="this.parentElement.style.background='#2a0a0a';this.parentElement.style.minHeight='360px'"/></div>
-      <div class="screenshot-item"><img src="screenshots/screen8.png" alt="Previous numbers" onerror="this.parentElement.style.background='#2a0a0a';this.parentElement.style.minHeight='360px'"/></div>
-    </div>
-  </section>
-
-  <!-- STATS -->
-  <section class="stats">
-    <div class="stats-grid">
-      <div>
-        <div class="stat-number">10K</div>
-        <div class="stat-label">Daily Number Pool</div>
-        <div class="stat-label-cn">每日号码池</div>
+    <!-- CTA -->
+    <section class="cta">
+      <h2 class="cta-title">Ready for Luck &amp; High Scores?</h2>
+      <p class="cta-subtitle">今天就下载两个 App</p>
+      <p class="cta-desc">BaoTio drops fresh lucky numbers daily at 12PM.<br>HIT 1000 is ready for instant tapping fun
+        anytime.</p>
+      <div class="download-buttons" style="justify-content:center; gap:2rem;">
+        <!-- BaoTio buttons again for easy access -->
+        <div>
+          <div class="app-label" style="text-align:center; margin-bottom:8px;">BaoTio</div>
+          <a href="https://play.google.com/store/apps/details?id=com.SuperBoringStudio.BaoTio" target="_blank"
+            class="btn-download btn-google">Google Play</a>
+        </div>
+        <!-- HIT 1000 buttons again -->
+        <div>
+          <div class="app-label" style="text-align:center; margin-bottom:8px;">HIT 1000</div>
+          <a href="https://apps.apple.com/us/app/hit-1000/id1503987014" target="_blank"
+            class="btn-download btn-apple">App Store</a>
+        </div>
       </div>
-      <div>
-        <div class="stat-number">2</div>
-        <div class="stat-label">Game Formats</div>
-        <div class="stat-label-cn">游戏格式</div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-inner">
+        <div>
+          <div class="footer-brand-name">🐷 Lucky Pig Studio</div>
+          <p class="footer-brand-desc">Building lucky &amp; addictive apps for the Southeast Asian community. Based in
+            Singapore 🇸🇬</p>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Apps</div>
+          <ul>
+            <li><a href="#baotio">BaoTio</a></li>
+            <li><a href="#hit1000">HIT 1000</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Legal</div>
+          <ul>
+            <li><a href="#" onclick="showPrivacy(); return false;">Privacy Policy</a></li>
+            <li><a href="mailto:support@luckypigstudio.com">Support</a></li>
+            <li><a href="mailto:contact@luckypigstudio.com">Contact</a></li>
+          </ul>
+        </div>
       </div>
-      <div>
-        <div class="stat-number">100%</div>
-        <div class="stat-label">Unique Per User</div>
-        <div class="stat-label-cn">专属号码</div>
+      <div class="footer-bottom">
+        <p>© 2026 Lucky Pig Studio. All rights reserved.</p>
+        <p>Made with 🐷 &amp; ❤️ in Singapore • BaoTio • HIT 1000</p>
       </div>
-      <div>
-        <div class="stat-number">Free</div>
-        <div class="stat-label">Always Free</div>
-        <div class="stat-label-cn">永久免费</div>
-      </div>
-    </div>
-  </section>
+    </footer>
 
-  <!-- CTA -->
-  <section class="cta">
-    <h2 class="cta-title">Claim Your Lucky Number</h2>
-    <p class="cta-subtitle">今天就领取你的幸运号码</p>
-    <p class="cta-desc">Every day at 12PM, 10,000 new numbers are released. Be among the first to claim yours.</p>
-    <div class="download-buttons" style="justify-content:center">
-      <a href="https://play.google.com/store/apps/details?id=com.SuperBoringStudio.BaoTio" target="_blank" class="btn-download btn-google">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76c.33.18.7.22 1.06.1l12.74-7.36-2.73-2.73-11.07 9.99zM.5 1.7C.19 2.03 0 2.53 0 3.17v17.66c0 .64.19 1.14.5 1.47l.08.08 9.9-9.9v-.23L.58 1.62.5 1.7zm19.1 10.85l-2.6-1.5-2.98 2.98 2.98 2.98 2.62-1.51c.75-.43.75-1.13-.02-1.56v.01zM4.24.14L16.98 7.5l-2.73 2.73L4.18.24C4.5.07 4.87.1 5.22.27l-1-.13z"/></svg>
-        Get on Google Play
-      </a>
-      <a href="#" class="btn-download btn-apple">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98l-.09.06c-.22.14-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.77M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-        Coming to App Store
-      </a>
-    </div>
-  </section>
+  </div>
 
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer-inner">
-      <div>
-        <div class="footer-brand-name">🐷 Lucky Pig Studio</div>
-        <p class="footer-brand-desc">Building lucky apps for the Southeast Asian community. Based in Singapore 🇸🇬</p>
-      </div>
-      <div class="footer-col">
-        <div class="footer-col-title">App</div>
-        <ul>
-          <li><a href="#features">Features</a></li>
-          <li><a href="#screenshots">Screenshots</a></li>
-          <li><a href="#download">Download</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <div class="footer-col-title">Legal</div>
-        <ul>
-          <li><a href="#" onclick="showPrivacy(); return false;">Privacy Policy</a></li>
-          <li><a href="mailto:support@luckypigstudio.com">Support</a></li>
-          <li><a href="mailto:contact@luckypigstudio.com">Contact</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>© 2026 Lucky Pig Studio. All rights reserved.</p>
-      <p>Made with 🐷 &amp; ❤️ in Singapore</p>
-    </div>
-  </footer>
+  <!-- PRIVACY PAGE (unchanged, applies to both apps) -->
+  <div id="privacy-content" class="privacy-page">
+    <h1>Privacy Policy</h1>
+    <p><em>Last updated: April 2026</em></p>
 
-</div>
+    <p>Lucky Pig Studio ("we", "us", or "our") operates both BaoTio and HIT 1000 mobile applications. This page informs
+      you of our policies regarding the collection, use, and disclosure of personal data when you use our apps.</p>
 
-<!-- PRIVACY PAGE -->
-<div id="privacy-content" class="privacy-page">
-  <h1>Privacy Policy</h1>
-  <p><em>Last updated: March 2026</em></p>
+    <h2>Information We Collect</h2>
+    <p>Both apps are designed with privacy in mind. We collect minimal data:</p>
+    <ul>
+      <li><strong>Device Advertising ID</strong> — Used by our ad partners (Google AdMob, IronSource/LevelPlay) to serve
+        relevant advertisements.</li>
+      <li><strong>App usage data</strong> — Anonymised crash reports and performance data to improve app stability.</li>
+      <li><strong>Game data</strong> — Lucky number history (BaoTio) and high scores (HIT 1000) are stored locally on
+        your device only.</li>
+    </ul>
 
-  <p>Lucky Pig Studio ("we", "us", or "our") operates the BaoTio mobile application. This page informs you of our policies regarding the collection, use, and disclosure of personal data when you use our app.</p>
+    <h2>Advertising</h2>
+    <p>Both apps are free to use and supported by advertising. We use Google AdMob and IronSource / Unity LevelPlay.</p>
 
-  <h2>Information We Collect</h2>
-  <p>BaoTio is designed with privacy in mind. We collect minimal data:</p>
-  <ul>
-    <li><strong>Device Advertising ID</strong> — Used by our ad partners (Google AdMob, IronSource/LevelPlay) to serve relevant advertisements.</li>
-    <li><strong>App usage data</strong> — Anonymised crash reports and performance data to improve app stability.</li>
-    <li><strong>Lucky number history</strong> — Stored locally on your device only. We do not collect or store your lucky numbers on our servers.</li>
-  </ul>
+    <h2>Data Storage</h2>
+    <p>All game progress is stored locally on your device. Nothing is sent to our servers except anonymous API requests
+      for daily numbers (BaoTio) or ad serving.</p>
 
-  <h2>Advertising</h2>
-  <p>BaoTio is free to use and supported by advertising. We use the following ad networks:</p>
-  <ul>
-    <li>Google AdMob</li>
-    <li>IronSource / Unity LevelPlay</li>
-  </ul>
-  <p>These partners may collect data as described in their respective privacy policies. You can opt out of personalised advertising through your device settings.</p>
+    <h2>Children's Privacy</h2>
+    <p>Neither app is directed at children under 13. We do not knowingly collect personal information from children
+      under 13.</p>
 
-  <h2>Data Storage</h2>
-  <p>Your lucky number history and app preferences are stored locally on your device using Android/iOS local storage (PlayerPrefs). This data is not transmitted to our servers and is deleted when you uninstall the app.</p>
+    <h2>Changes to This Policy</h2>
+    <p>We may update this privacy policy from time to time. We will notify you of changes by updating the date at the
+      top of this page.</p>
 
-  <h2>Our API</h2>
-  <p>BaoTio connects to our secure API to retrieve your daily unique lucky number. This API call does not transmit any personally identifiable information — only an anonymous request is made to claim a number from the daily pool.</p>
+    <h2>Contact Us</h2>
+    <p>If you have questions about this privacy policy, please contact us at: <a
+        href="mailto:support@luckypigstudio.com" style="color:var(--gold)">support@luckypigstudio.com</a></p>
 
-  <h2>Children's Privacy</h2>
-  <p>BaoTio is not directed at children under 13. We do not knowingly collect personal information from children under 13.</p>
+    <br>
+    <a href="#" onclick="showHome(); return false;" style="color:var(--gold); text-decoration:none;">← Back to Home</a>
+  </div>
 
-  <h2>Changes to This Policy</h2>
-  <p>We may update this privacy policy from time to time. We will notify you of changes by updating the date at the top of this page.</p>
+  <script>
+    function showPrivacy() {
+      document.getElementById('main-content').style.display = 'none';
+      document.getElementById('privacy-content').style.display = 'block';
+      window.scrollTo(0, 0);
+    }
 
-  <h2>Contact Us</h2>
-  <p>If you have questions about this privacy policy, please contact us at: <a href="mailto:support@luckypigstudio.com" style="color:var(--gold)">support@luckypigstudio.com</a></p>
-
-  <br>
-  <a href="#" onclick="showHome(); return false;" style="color:var(--gold); text-decoration:none;">← Back to Home</a>
-</div>
-
-<script>
-  function showPrivacy() {
-    document.getElementById('main-content').style.display = 'none';
-    document.getElementById('privacy-content').style.display = 'block';
-    window.scrollTo(0, 0);
-  }
-
-  function showHome() {
-    document.getElementById('main-content').style.display = 'block';
-    document.getElementById('privacy-content').style.display = 'none';
-    window.scrollTo(0, 0);
-  }
-</script>
+    function showHome() {
+      document.getElementById('main-content').style.display = 'block';
+      document.getElementById('privacy-content').style.display = 'none';
+      window.scrollTo(0, 0);
+    }
+  </script>
 
 </body>
+
 </html>
