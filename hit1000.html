@@ -4,11 +4,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HIT 1000 • Lucky Pig Studio</title>
+  <title>HIT 1000 – Test Your Reflexes | Lucky Pig Studio</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Lato:wght@300;400;700;900&display=swap"
+    rel="stylesheet">
   <style>
     :root {
-      --hit-purple: #6B3FBF;
-      --hit-cyan: #00E5FF;
+      --primary: #9d50bb;
+      --secondary: #6e48aa;
+      --accent: #00f2fe;
+      --accent-dark: #4facfe;
+      --text-light: #ffffff;
+      --bg-dark: #1a1a2e;
     }
 
     * {
@@ -19,158 +26,310 @@
 
     body {
       font-family: 'Lato', sans-serif;
-      background: linear-gradient(180deg, #2A1B4A, #111133);
-      color: #fff;
+      background: var(--bg-dark);
+      color: var(--text-light);
       overflow-x: hidden;
     }
 
+    /* ── NAV (Consistent with Index) ── */
     nav {
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
       z-index: 100;
-      background: rgba(30, 20, 60, 0.95);
-      backdrop-filter: blur(12px);
-      padding: 1rem 2.5rem;
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2.5rem;
+      background: rgba(26, 26, 46, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0, 242, 254, 0.2);
     }
 
     .nav-logo {
-      color: var(--hit-cyan);
-      font-size: 1.3rem;
+      font-family: 'Cinzel Decorative', serif;
       text-decoration: none;
-      font-weight: 700;
+      color: var(--accent);
     }
 
+    .nav-logo span {
+      color: #fff;
+      font-size: 0.75rem;
+      display: block;
+      font-family: 'Lato', sans-serif;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      opacity: 0.7;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+    }
+
+    nav ul a {
+      color: rgba(255, 255, 255, 0.8);
+      text-decoration: none;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      transition: 0.2s;
+    }
+
+    nav ul a:hover {
+      color: var(--accent);
+    }
+
+    /* ── HERO ── */
     .hero {
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: radial-gradient(circle at 50% 30%, #6B3FBF, #111133);
-      text-align: center;
-      padding-top: 80px;
+      background: linear-gradient(135deg, #9d50bb 0%, #6e48aa 100%);
+      padding: 8rem 2rem 4rem;
+      position: relative;
     }
 
-    .hero h1 {
-      font-size: clamp(3.5rem, 8vw, 6rem);
-      background: linear-gradient(90deg, #00E5FF, #FFFFFF);
-      -webkit-background-clip: text;
-      color: transparent;
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h1v1H0V0zm10 10h1v1h-1v-1z' fill='%23ffffff' fill-opacity='0.05'/%3E%3C/svg%3E");
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      max-width: 1100px;
+      align-items: center;
+    }
+
+    .hero-title {
+      font-size: clamp(3rem, 6vw, 5rem);
+      font-weight: 900;
+      line-height: 1;
       margin-bottom: 1rem;
+      color: #fff;
+      text-shadow: 0 0 20px rgba(0, 242, 254, 0.5);
     }
 
-    .features-grid {
+    .hero-desc {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+      line-height: 1.6;
+    }
+
+    .btn-apple {
+      background: #000;
+      color: #fff;
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: bold;
+      border: 2px solid var(--accent);
+      transition: 0.3s;
+    }
+
+    .btn-apple:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px var(--accent);
+    }
+
+    /* ── GAMEPLAY GRID ── */
+    .feature-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 2rem;
+      padding: 6rem 2rem;
       max-width: 1100px;
       margin: 0 auto;
-      padding: 4rem 2rem;
     }
 
-    .feature-card {
-      background: rgba(255, 255, 255, 0.08);
-      border: 2px solid var(--hit-cyan);
+    .card {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 2rem;
       border-radius: 20px;
-      padding: 2rem;
-      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
-    .screenshot-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1.5rem;
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 2rem;
+    .card h3 {
+      color: var(--accent);
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
     }
 
-    .screenshot-grid img {
+    /* ── SCORING TABLE ── */
+    .score-table {
       width: 100%;
-      border-radius: 20px;
-      border: 3px solid var(--hit-cyan);
-      box-shadow: 0 10px 30px rgba(0, 229, 255, 0.3);
+      border-collapse: collapse;
+      margin-top: 1rem;
     }
 
-    .btn-download {
-      background: var(--hit-cyan);
-      color: #111133;
-      padding: 1rem 2.5rem;
-      border-radius: 9999px;
-      font-weight: 700;
-      text-decoration: none;
-      display: inline-block;
-      margin-top: 2rem;
+    .score-table td {
+      padding: 8px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .score-tier {
+      font-weight: bold;
+    }
+
+    .tier-perfect {
+      color: #ff00ff;
+    }
+
+    .tier-great {
+      color: var(--accent);
+    }
+
+    /* ── SCREENSHOTS ── */
+    .screenshots {
+      padding: 6rem 2rem;
+      text-align: center;
+      background: #131325;
+    }
+
+    .shot-container {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 3rem;
+    }
+
+    .shot-container img {
+      width: 220px;
+      border-radius: 20px;
+      border: 4px solid #333;
+      transition: 0.3s;
+    }
+
+    .shot-container img:hover {
+      transform: translateY(-10px);
+      border-color: var(--accent);
+    }
+
+    /* ── PHONE MOCKUP ── */
+    .phone-mockup {
+      position: relative;
+      justify-self: center;
+    }
+
+    .phone-img {
+      width: 280px;
+      filter: drop-shadow(0 0 30px rgba(0, 0, 0, 0.5));
+    }
+
+    @media (max-width: 768px) {
+      .hero-inner {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      nav ul {
+        display: none;
+      }
     }
   </style>
 </head>
 
 <body>
+
   <nav>
-    <a href="index.html" class="nav-logo">🐷 Lucky Pig Studio • HIT 1000</a>
-    <a href="baotio.html" style="color:#fff; text-decoration:none;">BaoTio</a>
+    <div style="display: flex; align-items: center; gap: 2rem;">
+      <a href="index.html" class="nav-logo"><span>Lucky Pig Studio</span></a>
+      <div style="display: flex; gap: 0.5rem; background: rgba(255,255,255,0.1); padding: 4px; border-radius: 8px;">
+        <a href="index.html"
+          style="color: #fff; padding: 4px 12px; border-radius: 6px; text-decoration: none; font-size: 0.75rem; font-weight: bold;">BAOTIO</a>
+        <a href="hit1000.html"
+          style="background: var(--accent); color: #000; padding: 4px 12px; border-radius: 6px; text-decoration: none; font-size: 0.75rem; font-weight: bold;">HIT
+          1000</a>
+      </div>
+    </div>
+    <ul>
+      <li><a href="#features">Features</a></li>
+      <li><a href="#screenshots">Screenshots</a></li>
+      <li><a href="#download">Download</a></li>
+      <li><a href="mailto:support@luckypigstudio.com">Support</a></li>
+    </ul>
   </nav>
 
   <section class="hero">
-    <div>
-      <h1>HIT 1000</h1>
-      <p style="font-size:1.5rem; max-width:560px; margin:0 auto 2rem;">
-        Tap at the perfect moment.<br>Chase the highest score.
-      </p>
-      <a href="#" class="btn-download">GET ON GOOGLE PLAY (COMING SOON)</a>
-      <a href="https://apps.apple.com/us/app/hit-1000/id1503987014" target="_blank" class="btn-download"
-        style="background:#fff; color:#111133; margin-left:1rem;">
-        DOWNLOAD ON APP STORE
-      </a>
-    </div>
-  </section>
-
-  <section style="padding:4rem 2rem; background:#1A1433;">
-    <div class="features-grid">
-      <div class="feature-card">
-        <h3>One-Tap Addiction</h3>
-        <p>Tap the glowing orb at the perfect moment for massive score multipliers.</p>
+    <div class="hero-inner">
+      <div>
+        <h1 class="hero-title">HIT<br>1000</h1>
+        <p class="hero-desc">The ultimate test of timing. Stop the clock at exactly 1000 to achieve perfection. How far
+          can your reflexes take you?</p>
+        <a href="https://apps.apple.com/us/app/hit-1000/id1503987014" class="btn-apple">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98l-.09.06c-.22.14-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.77M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
+          </svg>
+          Download on App Store
+        </a>
       </div>
-      <div class="feature-card">
-        <h3>Perfect! Combos</h3>
-        <p>Land perfect hits for +10 bonuses and explosive sparkles.</p>
-      </div>
-      <div class="feature-card">
-        <h3>Chase Your High Score</h3>
-        <p>Beat your personal best every time you play.</p>
-      </div>
-      <div class="feature-card">
-        <h3>Crisp Tap Feedback</h3>
-        <p>Every hit feels incredibly satisfying with crisp audio and beautiful particle effects.</p>
-      </div>
-      <div class="feature-card">
-        <h3>Stunning Visuals</h3>
-        <p>Purple-to-cyan gradients and floating stars make every session feel premium.</p>
-      </div>
-      <div class="feature-card">
-        <h3>Soothing Background Music</h3>
-        <p>Relaxing ambient music and satisfying sound effects create the perfect zen-like tapping experience.</p>
+      <div class="phone-mockup">
+        <img src="hit-screen1.jpg" class="phone-img" alt="HIT 1000 Gameplay">
       </div>
     </div>
   </section>
 
-  <section style="padding:4rem 2rem;">
-    <h2 style="text-align:center; color:var(--hit-cyan); margin-bottom:2rem;">Gameplay Screenshots</h2>
-    <div class="screenshot-grid">
-      <img src="screenshots/hit-screen1.png" alt="HIT 1000 gameplay">
-      <img src="screenshots/hit-screen2.png" alt="HIT 1000 gameplay">
-      <img src="screenshots/hit-screen3.png" alt="HIT 1000 gameplay">
-      <img src="screenshots/hit-screen4.png" alt="HIT 1000 gameplay">
+  <section class="feature-grid" id="features">
+    <div class="card">
+      <h3>The Concept</h3>
+      <p>Simple yet addictive. A number runs at high speed—your job is to stop it as close to the target as possible.
+        Hit the target, and the challenge escalates!</p>
+    </div>
+    <div class="card">
+      <h3>Dynamic Difficulty</h3>
+      <p>Success moves the goalposts. Target 1000 becomes 2000, then 3000. As the numbers climb, the speed intensifies,
+        demanding split-second precision.</p>
+    </div>
+    <div class="card">
+      <h3>Scoring Tiers</h3>
+      <table class="score-table">
+        <tr>
+          <td>1000</td>
+          <td class="score-tier tier-perfect">PERFECT!</td>
+          <td>10 pts</td>
+        </tr>
+        <tr>
+          <td>995 - 1005</td>
+          <td class="score-tier tier-great">GREAT</td>
+          <td>5 pts</td>
+        </tr>
+        <tr>
+          <td>990 - 1010</td>
+          <td class="score-tier">GOOD</td>
+          <td>2 pts</td>
+        </tr>
+      </table>
     </div>
   </section>
 
-  <footer style="text-align:center; padding:3rem; background:#111133; color:#aaa;">
-    © 2026 Lucky Pig Studio • Made with ❤️ in Singapore
+  <section class="screenshots" id="screenshots">
+    <h2 style="font-size: 2.5rem; font-family: 'Cinzel Decorative';">Game Gallery</h2>
+    <div class="shot-container">
+      <img src="hit-screen1.jpg" alt="Screen 1">
+      <img src="hit-screen2.jpg" alt="Screen 2">
+      <img src="hit-screen3.jpg" alt="Screen 3">
+      <img src="hit-screen4.jpg" alt="Screen 4">
+    </div>
+  </section>
+
+  <footer style="padding: 4rem 2rem; text-align: center; border-top: 1px solid rgba(255,255,255,0.1);">
+    <p>© 2026 Lucky Pig Studio. Made in Singapore 🇸🇬</p>
   </footer>
+
 </body>
 
 </html>
