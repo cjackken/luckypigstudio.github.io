@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HIT 1000 • Lucky Pig Studio</title>
+  <style>
+    :root {
+      --hit-purple: #6B3FBF;
+      --hit-cyan: #00E5FF;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Lato', sans-serif;
+      background: linear-gradient(180deg, #2A1B4A, #111133);
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(30, 20, 60, 0.95);
+      backdrop-filter: blur(12px);
+      padding: 1rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-logo {
+      color: var(--hit-cyan);
+      font-size: 1.3rem;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at 50% 30%, #6B3FBF, #111133);
+      text-align: center;
+      padding-top: 80px;
+    }
+
+    .hero h1 {
+      font-size: clamp(3.5rem, 8vw, 6rem);
+      background: linear-gradient(90deg, #00E5FF, #FFFFFF);
+      -webkit-background-clip: text;
+      color: transparent;
+      margin-bottom: 1rem;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+
+    .feature-card {
+      background: rgba(255, 255, 255, 0.08);
+      border: 2px solid var(--hit-cyan);
+      border-radius: 20px;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .screenshot-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .screenshot-grid img {
+      width: 100%;
+      border-radius: 20px;
+      border: 3px solid var(--hit-cyan);
+      box-shadow: 0 10px 30px rgba(0, 229, 255, 0.3);
+    }
+
+    .btn-download {
+      background: var(--hit-cyan);
+      color: #111133;
+      padding: 1rem 2.5rem;
+      border-radius: 9999px;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <a href="index.html" class="nav-logo">🐷 Lucky Pig Studio • HIT 1000</a>
+    <a href="baotio.html" style="color:#fff; text-decoration:none;">BaoTio</a>
+  </nav>
+
+  <section class="hero">
+    <div>
+      <h1>HIT 1000</h1>
+      <p style="font-size:1.5rem; max-width:560px; margin:0 auto 2rem;">
+        Tap at the perfect moment.<br>Chase the highest score.
+      </p>
+      <a href="#" class="btn-download">GET ON GOOGLE PLAY (COMING SOON)</a>
+      <a href="https://apps.apple.com/us/app/hit-1000/id1503987014" target="_blank" class="btn-download"
+        style="background:#fff; color:#111133; margin-left:1rem;">
+        DOWNLOAD ON APP STORE
+      </a>
+    </div>
+  </section>
+
+  <section style="padding:4rem 2rem; background:#1A1433;">
+    <div class="features-grid">
+      <div class="feature-card">
+        <h3>One-Tap Addiction</h3>
+        <p>Tap the glowing orb at the perfect moment for massive score multipliers.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Perfect! Combos</h3>
+        <p>Land perfect hits for +10 bonuses and explosive sparkles.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Chase Your High Score</h3>
+        <p>Beat your personal best every time you play.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Crisp Tap Feedback</h3>
+        <p>Every hit feels incredibly satisfying with crisp audio and beautiful particle effects.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Stunning Visuals</h3>
+        <p>Purple-to-cyan gradients and floating stars make every session feel premium.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Soothing Background Music</h3>
+        <p>Relaxing ambient music and satisfying sound effects create the perfect zen-like tapping experience.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding:4rem 2rem;">
+    <h2 style="text-align:center; color:var(--hit-cyan); margin-bottom:2rem;">Gameplay Screenshots</h2>
+    <div class="screenshot-grid">
+      <img src="screenshots/hit-screen1.png" alt="HIT 1000 gameplay">
+      <img src="screenshots/hit-screen2.png" alt="HIT 1000 gameplay">
+      <img src="screenshots/hit-screen3.png" alt="HIT 1000 gameplay">
+      <img src="screenshots/hit-screen4.png" alt="HIT 1000 gameplay">
+    </div>
+  </section>
+
+  <footer style="text-align:center; padding:3rem; background:#111133; color:#aaa;">
+    © 2026 Lucky Pig Studio • Made with ❤️ in Singapore
+  </footer>
+</body>
+
+</html>
