@@ -1,390 +1,635 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HIT 1000 – Test Your Reflexes | Lucky Pig Studio</title>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Lato:wght@300;400;700;900&display=swap"
-    rel="stylesheet">
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HIT 1000 — Stop the Number | Lucky Pig Studio</title>
+  <meta name="description" content="HIT 1000 is a precision tap arcade game. Stop the climbing number as close to 1000 as possible. One tap. Pure timing. How far can you go?"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #9d50bb;
-      --secondary: #6e48aa;
-      --accent: #00f2fe;
-      --accent-dark: #4facfe;
-      --text-light: #ffffff;
-      --bg-dark: #1a1a2e;
+      --pink: #e84d87;
+      --pink-light: #f472b6;
+      --purple: #7c3aed;
+      --purple-light: #a78bfa;
+      --teal: #0d9488;
+      --teal-light: #5eead4;
+      --orange: #f97316;
+      --bg-dark: #0e0816;
     }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
     body {
-      font-family: 'Lato', sans-serif;
-      background: var(--bg-dark);
-      color: var(--text-light);
-      overflow-x: hidden;
+      font-family:'DM Sans',sans-serif;
+      background:var(--bg-dark);
+      color:#f0eaff;
+      overflow-x:hidden;
+    }
+    body::before {
+      content:'';
+      position:fixed;
+      inset:0;
+      background:
+        radial-gradient(ellipse 70% 50% at 20% 20%, rgba(232,77,135,0.08) 0%, transparent 55%),
+        radial-gradient(ellipse 70% 50% at 80% 80%, rgba(13,148,136,0.07) 0%, transparent 55%),
+        radial-gradient(ellipse 50% 40% at 50% 50%, rgba(124,58,237,0.06) 0%, transparent 60%);
+      pointer-events:none;
+      z-index:0;
     }
 
-    /* ── NAV (Consistent with Index) ── */
+    /* ── NAV ── */
     nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1rem 2.5rem;
-      background: rgba(26, 26, 46, 0.85);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(0, 242, 254, 0.2);
+      position:fixed;
+      top:0;left:0;right:0;
+      z-index:200;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:1rem 2.5rem;
+      background:rgba(14,8,22,0.88);
+      backdrop-filter:blur(16px);
+      border-bottom:1px solid rgba(168,85,247,0.15);
     }
-
     .nav-logo {
-      font-family: 'Cinzel Decorative', serif;
-      text-decoration: none;
-      color: var(--accent);
+      font-family:'Cinzel Decorative',serif;
+      font-size:0.95rem;
+      color:#c084fc;
+      text-decoration:none;
+      display:flex;
+      align-items:center;
+      gap:0.4rem;
     }
-
-    .nav-logo span {
-      color: #fff;
-      font-size: 0.75rem;
-      display: block;
-      font-family: 'Lato', sans-serif;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      opacity: 0.7;
+    nav ul { list-style:none; display:flex; gap:0.25rem; align-items:center; }
+    nav ul li a {
+      color:rgba(240,234,255,0.6);
+      text-decoration:none;
+      font-size:0.85rem;
+      padding:0.4rem 0.85rem;
+      border-radius:8px;
+      transition:color 0.2s,background 0.2s;
     }
-
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 2rem;
+    nav ul li a:hover { color:#fff; background:rgba(168,85,247,0.1); }
+    nav ul li a.active {
+      color:#c084fc;
+      background:rgba(168,85,247,0.15);
+      font-weight:700;
     }
-
-    nav ul a {
-      color: rgba(255, 255, 255, 0.8);
-      text-decoration: none;
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      transition: 0.2s;
-    }
-
-    nav ul a:hover {
-      color: var(--accent);
+    .nav-support {
+      background:linear-gradient(135deg,var(--pink),var(--purple)) !important;
+      color:#fff !important;
+      font-weight:700 !important;
+      padding:0.4rem 1rem !important;
     }
 
     /* ── HERO ── */
     .hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, #9d50bb 0%, #6e48aa 100%);
-      padding: 8rem 2rem 4rem;
-      position: relative;
+      position:relative;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:7rem 2rem 4rem;
+      overflow:hidden;
+      z-index:1;
     }
-
-    .hero::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h1v1H0V0zm10 10h1v1h-1v-1z' fill='%23ffffff' fill-opacity='0.05'/%3E%3C/svg%3E");
+    /* Animated gradient orbs */
+    .orb {
+      position:absolute;
+      border-radius:50%;
+      filter:blur(80px);
+      opacity:0.35;
+      animation:drift 8s ease-in-out infinite;
+    }
+    .orb-1 { width:500px;height:500px;background:radial-gradient(circle,var(--pink),transparent);top:-100px;left:-100px;animation-delay:0s; }
+    .orb-2 { width:400px;height:400px;background:radial-gradient(circle,var(--teal),transparent);bottom:-80px;right:-80px;animation-delay:3s; }
+    .orb-3 { width:300px;height:300px;background:radial-gradient(circle,var(--purple),transparent);top:50%;left:50%;transform:translate(-50%,-50%);animation-delay:1.5s; }
+    @keyframes drift {
+      0%,100%{transform:translate(0,0) scale(1)}
+      33%{transform:translate(20px,-15px) scale(1.05)}
+      66%{transform:translate(-15px,20px) scale(0.97)}
+    }
+    .orb-3 { animation:drift3 8s ease-in-out infinite; }
+    @keyframes drift3 {
+      0%,100%{transform:translate(-50%,-50%) scale(1)}
+      50%{transform:translate(-50%,-50%) scale(1.1)}
     }
 
     .hero-inner {
-      position: relative;
-      z-index: 2;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      max-width: 1100px;
-      align-items: center;
+      position:relative;
+      z-index:2;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:4rem;
+      align-items:center;
+      max-width:1100px;
+      width:100%;
     }
-
+    .hero-badge {
+      display:inline-flex;
+      align-items:center;
+      gap:0.4rem;
+      background:rgba(168,85,247,0.12);
+      border:1px solid rgba(168,85,247,0.3);
+      border-radius:100px;
+      padding:0.35rem 0.9rem;
+      font-size:0.72rem;
+      letter-spacing:0.14em;
+      text-transform:uppercase;
+      color:#c084fc;
+      margin-bottom:1.25rem;
+      opacity:0;
+      animation:fadeUp 0.8s 0.2s forwards;
+    }
     .hero-title {
-      font-size: clamp(3rem, 6vw, 5rem);
-      font-weight: 900;
-      line-height: 1;
-      margin-bottom: 1rem;
-      color: #fff;
-      text-shadow: 0 0 20px rgba(0, 242, 254, 0.5);
+      font-family:'Cinzel Decorative',serif;
+      font-size:clamp(3rem,6vw,5rem);
+      line-height:1;
+      background:linear-gradient(135deg,#f472b6,#a78bfa,#67e8f9);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      background-clip:text;
+      margin-bottom:0.75rem;
+      opacity:0;
+      animation:fadeUp 0.8s 0.3s forwards;
     }
-
+    .hero-tagline {
+      font-size:1.35rem;
+      font-weight:500;
+      color:rgba(240,234,255,0.85);
+      margin-bottom:1.5rem;
+      opacity:0;
+      animation:fadeUp 0.8s 0.4s forwards;
+    }
+    .hero-tagline span { color:#f472b6; }
     .hero-desc {
-      font-size: 1.2rem;
-      margin-bottom: 2rem;
-      opacity: 0.9;
-      line-height: 1.6;
+      font-size:1rem;
+      line-height:1.8;
+      color:rgba(240,234,255,0.68);
+      max-width:460px;
+      margin-bottom:2.5rem;
+      opacity:0;
+      animation:fadeUp 0.8s 0.5s forwards;
+    }
+    .dl-buttons {
+      display:flex;
+      gap:0.85rem;
+      flex-wrap:wrap;
+      opacity:0;
+      animation:fadeUp 0.8s 0.65s forwards;
+    }
+    .btn {
+      display:inline-flex;
+      align-items:center;
+      gap:0.5rem;
+      padding:0.85rem 1.6rem;
+      border-radius:12px;
+      text-decoration:none;
+      font-weight:700;
+      font-size:0.88rem;
+      letter-spacing:0.03em;
+      transition:transform 0.2s,box-shadow 0.2s,opacity 0.2s;
+    }
+    .btn:hover { transform:translateY(-2px); }
+    .btn svg { width:18px;height:18px;flex-shrink:0; }
+    .btn-purple {
+      background:linear-gradient(135deg,var(--purple),var(--pink));
+      color:#fff;
+      box-shadow:0 4px 22px rgba(124,58,237,0.45);
+    }
+    .btn-purple:hover { box-shadow:0 8px 35px rgba(124,58,237,0.6); }
+    .btn-teal {
+      background:linear-gradient(135deg,var(--teal),#0ea5e9);
+      color:#fff;
+      box-shadow:0 4px 22px rgba(13,148,136,0.4);
+    }
+    .btn-teal:hover { box-shadow:0 8px 35px rgba(13,148,136,0.55); }
+    .btn-ghost {
+      background:rgba(168,85,247,0.08);
+      color:#c084fc;
+      border:1px solid rgba(168,85,247,0.28);
+    }
+    .btn-disabled { opacity:0.38; cursor:not-allowed; pointer-events:none; }
+
+    /* ── PHONES ── */
+    .phones {
+      position:relative;
+      display:flex;
+      justify-content:center;
+      align-items:flex-end;
+      gap:0.75rem;
+      opacity:0;
+      animation:fadeUp 0.8s 0.4s forwards;
+    }
+    .phone { border-radius:30px; overflow:hidden; box-shadow:0 24px 55px rgba(0,0,0,0.6); flex-shrink:0; }
+    .phone img { width:100%;height:auto;display:block; }
+    .phone-main { width:185px; border:2px solid rgba(168,85,247,0.45); }
+    .phone-side { width:148px; opacity:0.6; }
+    .phone-left { transform:rotate(-7deg) translateY(18px); }
+    .phone-right { transform:rotate(7deg) translateY(18px); }
+
+    /* ── DIVIDER ── */
+    .divider {
+      height:1px;
+      background:linear-gradient(90deg,transparent,rgba(168,85,247,0.4),rgba(13,148,136,0.4),transparent);
+      position:relative;z-index:1;
     }
 
-    .btn-apple {
-      background: #000;
-      color: #fff;
-      padding: 1rem 2rem;
-      border-radius: 50px;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      font-weight: bold;
-      border: 2px solid var(--accent);
-      transition: 0.3s;
+    /* ── HOW TO PLAY ── */
+    .how {
+      position:relative;z-index:1;
+      padding:6rem 2rem;
+      background:linear-gradient(180deg,rgba(14,8,22,0.8) 0%,rgba(20,8,35,0.9) 100%);
     }
+    .section-header { text-align:center; margin-bottom:4rem; }
+    .section-tag {
+      font-size:0.68rem;
+      letter-spacing:0.32em;
+      text-transform:uppercase;
+      color:#c084fc;
+      margin-bottom:0.75rem;
+      display:block;
+      opacity:0.75;
+    }
+    .section-title {
+      font-family:'Cinzel Decorative',serif;
+      font-size:clamp(1.7rem,3vw,2.5rem);
+      background:linear-gradient(135deg,#f472b6,#a78bfa);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      background-clip:text;
+    }
+    .how-steps {
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+      gap:1.75rem;
+      max-width:1000px;
+      margin:0 auto;
+    }
+    .step-card {
+      background:rgba(255,255,255,0.03);
+      border:1px solid rgba(168,85,247,0.12);
+      border-radius:20px;
+      padding:2rem 1.75rem;
+      position:relative;
+      overflow:hidden;
+      transition:transform 0.3s,background 0.3s;
+    }
+    .step-card::before {
+      content:'';
+      position:absolute;
+      top:0;left:0;right:0;
+      height:2px;
+      opacity:0;
+      transition:opacity 0.3s;
+    }
+    .step-card:nth-child(1)::before { background:linear-gradient(90deg,transparent,var(--pink),transparent); }
+    .step-card:nth-child(2)::before { background:linear-gradient(90deg,transparent,var(--purple-light),transparent); }
+    .step-card:nth-child(3)::before { background:linear-gradient(90deg,transparent,var(--teal-light),transparent); }
+    .step-card:nth-child(4)::before { background:linear-gradient(90deg,transparent,var(--orange),transparent); }
+    .step-card:hover { transform:translateY(-4px); background:rgba(255,255,255,0.05); }
+    .step-card:hover::before { opacity:1; }
+    .step-num {
+      font-family:'Cinzel Decorative',serif;
+      font-size:2.5rem;
+      line-height:1;
+      margin-bottom:1rem;
+    }
+    .step-card:nth-child(1) .step-num { color:var(--pink); }
+    .step-card:nth-child(2) .step-num { color:var(--purple-light); }
+    .step-card:nth-child(3) .step-num { color:var(--teal-light); }
+    .step-card:nth-child(4) .step-num { color:var(--orange); }
+    .step-title { font-weight:700; font-size:1rem; color:#fff; margin-bottom:0.5rem; }
+    .step-desc { font-size:0.875rem; line-height:1.7; color:rgba(240,234,255,0.6); }
 
-    .btn-apple:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 20px var(--accent);
+    /* ── SCORING ── */
+    .scoring {
+      position:relative;z-index:1;
+      padding:6rem 2rem;
+      background:rgba(0,0,0,0.2);
     }
-
-    /* ── GAMEPLAY GRID ── */
-    .feature-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-      padding: 6rem 2rem;
-      max-width: 1100px;
-      margin: 0 auto;
+    .score-grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+      gap:1.25rem;
+      max-width:900px;
+      margin:3rem auto 0;
     }
-
-    .card {
-      background: rgba(255, 255, 255, 0.05);
-      padding: 2rem;
-      border-radius: 20px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
+    .score-card {
+      border-radius:18px;
+      padding:1.75rem;
+      text-align:center;
+      border:1px solid;
+      transition:transform 0.2s;
     }
-
-    .card h3 {
-      color: var(--accent);
-      margin-bottom: 1rem;
-      font-size: 1.5rem;
+    .score-card:hover { transform:translateY(-3px); }
+    .score-card.good {
+      background:rgba(13,148,136,0.08);
+      border-color:rgba(13,148,136,0.25);
     }
-
-    /* ── SCORING TABLE ── */
-    .score-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 1rem;
+    .score-card.great {
+      background:rgba(124,58,237,0.1);
+      border-color:rgba(168,85,247,0.3);
     }
-
-    .score-table td {
-      padding: 8px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    .score-card.perfect {
+      background:rgba(232,77,135,0.1);
+      border-color:rgba(232,77,135,0.35);
+      position:relative;
+      overflow:hidden;
     }
-
-    .score-tier {
-      font-weight: bold;
+    .score-card.perfect::after {
+      content:'★';
+      position:absolute;
+      top:-10px;right:-10px;
+      font-size:5rem;
+      opacity:0.05;
+      color:var(--pink);
     }
-
-    .tier-perfect {
-      color: #ff00ff;
+    .score-label { font-size:0.7rem; letter-spacing:0.2em; text-transform:uppercase; margin-bottom:0.5rem; }
+    .score-card.good .score-label { color:var(--teal-light); }
+    .score-card.great .score-label { color:var(--purple-light); }
+    .score-card.perfect .score-label { color:var(--pink-light); }
+    .score-range { font-size:0.95rem; color:rgba(240,234,255,0.7); margin-bottom:0.75rem; }
+    .score-points {
+      font-family:'Cinzel Decorative',serif;
+      font-size:2rem;
+      line-height:1;
     }
-
-    .tier-great {
-      color: var(--accent);
-    }
+    .score-card.good .score-points { color:var(--teal-light); }
+    .score-card.great .score-points { color:var(--purple-light); }
+    .score-card.perfect .score-points { color:var(--pink-light); }
+    .score-pts-label { font-size:0.75rem; color:rgba(240,234,255,0.4); margin-top:0.3rem; }
 
     /* ── SCREENSHOTS ── */
     .screenshots {
-      padding: 6rem 2rem;
-      text-align: center;
-      background: #131325;
+      position:relative;z-index:1;
+      padding:6rem 2rem;
+      background:linear-gradient(180deg,rgba(20,8,35,0.9) 0%,rgba(14,8,22,1) 100%);
+    }
+    .shots-row {
+      display:flex;
+      gap:1.25rem;
+      justify-content:center;
+      flex-wrap:wrap;
+      max-width:900px;
+      margin:2.5rem auto 0;
+    }
+    .shot {
+      width:175px;
+      border-radius:24px;
+      overflow:hidden;
+      border:2px solid rgba(168,85,247,0.25);
+      box-shadow:0 10px 35px rgba(0,0,0,0.5);
+      transition:transform 0.3s,box-shadow 0.3s;
+      flex-shrink:0;
+    }
+    .shot:hover { transform:translateY(-8px) scale(1.02); box-shadow:0 20px 55px rgba(168,85,247,0.2); }
+    .shot img { width:100%;height:auto;display:block; }
+
+    /* ── CTA ── */
+    .cta {
+      position:relative;z-index:1;
+      padding:7rem 2rem;
+      text-align:center;
+      overflow:hidden;
+    }
+    .cta::before {
+      content:'';
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(ellipse 80% 60% at 30% 50%, rgba(232,77,135,0.1) 0%, transparent 60%),
+        radial-gradient(ellipse 80% 60% at 70% 50%, rgba(13,148,136,0.08) 0%, transparent 60%);
+    }
+    .cta-inner { position:relative;z-index:1; }
+    .cta-title {
+      font-family:'Cinzel Decorative',serif;
+      font-size:clamp(1.8rem,4vw,3rem);
+      background:linear-gradient(135deg,#f472b6,#a78bfa,#5eead4);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      background-clip:text;
+      margin-bottom:1rem;
+    }
+    .cta-desc {
+      font-size:1rem;
+      color:rgba(240,234,255,0.65);
+      max-width:460px;
+      margin:0 auto 2.5rem;
+      line-height:1.7;
     }
 
-    .shot-container {
-      display: flex;
-      gap: 20px;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-top: 3rem;
+    /* ── FOOTER ── */
+    footer {
+      position:relative;z-index:1;
+      background:rgba(0,0,0,0.4);
+      border-top:1px solid rgba(168,85,247,0.1);
+      padding:3rem 2rem 2rem;
     }
-
-    .shot-container img {
-      width: 220px;
-      border-radius: 20px;
-      border: 4px solid #333;
-      transition: 0.3s;
+    .footer-inner {
+      max-width:1100px;
+      margin:0 auto 2.5rem;
+      display:grid;
+      grid-template-columns:2fr 1fr 1fr;
+      gap:3rem;
     }
-
-    .shot-container img:hover {
-      transform: translateY(-10px);
-      border-color: var(--accent);
+    .footer-brand { font-family:'Cinzel Decorative',serif; font-size:1rem; color:#c084fc; margin-bottom:0.6rem; }
+    .footer-brand-desc { font-size:0.83rem; color:rgba(240,234,255,0.4); line-height:1.7; max-width:260px; }
+    .footer-col-title { font-size:0.65rem; letter-spacing:0.25em; text-transform:uppercase; color:rgba(192,132,252,0.6); margin-bottom:1rem; }
+    .footer-col ul { list-style:none; }
+    .footer-col ul li { margin-bottom:0.45rem; }
+    .footer-col ul a { color:rgba(240,234,255,0.5); text-decoration:none; font-size:0.875rem; transition:color 0.2s; }
+    .footer-col ul a:hover { color:#c084fc; }
+    .footer-bottom {
+      max-width:1100px;
+      margin:0 auto;
+      padding-top:1.75rem;
+      border-top:1px solid rgba(168,85,247,0.08);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:1rem;
     }
+    .footer-bottom p { font-size:0.78rem; color:rgba(240,234,255,0.28); }
 
-    /* ── PHONE MOCKUP ── */
-    .phone-mockup {
-      position: relative;
-      justify-self: center;
-    }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(22px)} to{opacity:1;transform:translateY(0)} }
 
-    .phone-img {
-      width: 280px;
-      filter: drop-shadow(0 0 30px rgba(0, 0, 0, 0.5));
-    }
-
-    @media (max-width: 768px) {
-      .hero-inner {
-        grid-template-columns: 1fr;
-        text-align: center;
-      }
-
-      nav ul {
-        display: none;
-      }
+    @media(max-width:768px){
+      .hero-inner { grid-template-columns:1fr; text-align:center; gap:2.5rem; }
+      .hero-desc { margin:0 auto 2rem; }
+      .dl-buttons { justify-content:center; }
+      .phones { order:-1; }
+      .phone-side { display:none; }
+      .phone-main { width:220px; }
+      .footer-inner { grid-template-columns:1fr; gap:2rem; }
+      nav ul { display:none; }
     }
   </style>
-
 </head>
-
 <body>
 
-  <nav>
+<nav>
+  <a href="index.html" class="nav-logo">Lucky Pig Studio</a>
+  <ul>
+    <li><a href="index.html">BaoTio</a></li>
+    <li><a href="hit1000.html" class="active">HIT 1000</a></li>
+    <li><a href="index.html#privacy" onclick="sessionStorage.setItem('goPrivacy','1')">Privacy</a></li>
+    <li><a href="mailto:support@luckypigstudio.com" class="nav-support">Support</a></li>
+  </ul>
+</nav>
 
-    <div style="display: flex; align-items: center; gap: 2rem;">
-      <a href="index.html" class="nav-logo" onclick="showHome()"><span>Lucky Pig Studio</span></a>
-      <div style="display: flex; gap: 0.5rem; background: rgba(255,255,255,0.1); padding: 4px; border-radius: 8px;">
-        <a href="index.html"
-          style="color: #fff; padding: 4px 12px; border-radius: 6px; text-decoration: none; font-size: 0.75rem; font-weight: bold;">BAOTIO</a>
-        <a href="hit1000.html"
-          style="background: var(--accent); color: #000; padding: 4px 12px; border-radius: 6px; text-decoration: none; font-size: 0.75rem; font-weight: bold;">HIT
-          1000</a>
+<section class="hero">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge">🎮 Arcade · Precision Tap</div>
+      <h1 class="hero-title">HIT 1000</h1>
+      <p class="hero-tagline">Stop the number.<br><span>Beat your best.</span></p>
+      <p class="hero-desc">The number climbs fast. Tap to stop it as close to 1000 as possible. Land in the zone and the target shifts — 1000, 2000, 3000, and beyond. Each round gets faster. One tap. Pure precision.</p>
+      <div class="dl-buttons" id="download">
+        <a href="#" class="btn btn-purple btn-disabled">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76c.33.18.7.22 1.06.1l12.74-7.36-2.73-2.73-11.07 9.99zM.5 1.7C.19 2.03 0 2.53 0 3.17v17.66c0 .64.19 1.14.5 1.47l.08.08 9.9-9.9v-.23L.58 1.62.5 1.7zm19.1 10.85l-2.6-1.5-2.98 2.98 2.98 2.98 2.62-1.51c.75-.43.75-1.13-.02-1.56v.01zM4.24.14L16.98 7.5l-2.73 2.73L4.18.24C4.5.07 4.87.1 5.22.27l-1-.13z"/></svg>
+          Coming to Google Play
+        </a>
+        <a href="https://apps.apple.com/us/app/hit-1000/id1503987014" target="_blank" class="btn btn-teal">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98l-.09.06c-.22.14-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.77M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+          Download on App Store
+        </a>
       </div>
     </div>
-
-    <ul>
-      <li><a href="#features" onclick="showHome()">Features</a></li>
-      <li><a href="#screenshots" onclick="showHome()">Screenshots</a></li>
-      <li><a href="#download" onclick="showHome()">Download</a></li>
-      <li><a href="#" onclick="showPrivacy(); return false;">Privacy</a></li>
-      <li><a href="mailto:support@luckypigstudio.com">Support</a></li>
-    </ul>
-
-  </nav>
-
-  <div id="main-content">
-
-    <section class="hero">
-      <div class="hero-inner">
-        <div>
-          <h1 class="hero-title">HIT<br>1000</h1>
-          <p class="hero-desc">The ultimate test of timing. Stop the clock at exactly 1000 to achieve perfection. How
-            far
-            can your reflexes take you?</p>
-          <a href="https://apps.apple.com/us/app/hit-1000/id1503987014" class="btn-apple">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-              <path
-                d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98l-.09.06c-.22.14-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.77M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
-            </svg>
-            Download on App Store
-          </a>
-        </div>
-        <div class="phone-mockup">
-          <img src="screenshots/hit-screen2.png" class="phone-img" alt="HIT 1000 Gameplay">
-        </div>
+    <div class="phones">
+      <div class="phone phone-side phone-left">
+        <img src="screenshots/hit1.png" alt="HIT 1000 gameplay" onerror="this.parentElement.style.cssText='background:rgba(124,58,237,0.25);min-height:300px;border-radius:30px'"/>
       </div>
-    </section>
-
-    <section class="feature-grid" id="features">
-      <div class="card">
-        <h3>The Concept</h3>
-        <p>Simple yet addictive. A number runs at high speed—your job is to stop it as close to the target as possible.
-          Hit the target, and the challenge escalates!</p>
+      <div class="phone phone-main">
+        <img src="screenshots/hit2.png" alt="HIT 1000 perfect!" onerror="this.parentElement.style.cssText='background:rgba(232,77,135,0.25);min-height:370px;border-radius:30px'"/>
       </div>
-      <div class="card">
-        <h3>Dynamic Difficulty</h3>
-        <p>Success moves the goalposts. Target 1000 becomes 2000, then 3000 and so on. As the numbers climb, the speed
-          intensifies,
-          demanding split-second precision.</p>
+      <div class="phone phone-side phone-right">
+        <img src="screenshots/hit3.png" alt="HIT 1000 advancing" onerror="this.parentElement.style.cssText='background:rgba(13,148,136,0.25);min-height:300px;border-radius:30px'"/>
       </div>
-      <div class="card">
-        <h3>Scoring Tiers</h3>
-        <table class="score-table">
-          <tr>
-            <td>1000</td>
-            <td class="score-tier tier-perfect">PERFECT!</td>
-            <td>10 pts</td>
-          </tr>
-          <tr>
-            <td>995 - 1005</td>
-            <td class="score-tier tier-great">GREAT</td>
-            <td>5 pts</td>
-          </tr>
-          <tr>
-            <td>990 - 1010</td>
-            <td class="score-tier">GOOD</td>
-            <td>2 pts</td>
-          </tr>
-        </table>
-      </div>
-    </section>
-
-    <section class="screenshots" id="screenshots">
-      <h2 style="font-size: 2.5rem; font-family: 'Cinzel Decorative';">Game Gallery</h2>
-      <div class="shot-container">
-        <img src="screenshots/hit-screen1.png" alt="Screen 1">
-        <img src="screenshots/hit-screen2.png" alt="Screen 2">
-        <img src="screenshots/hit-screen3.png" alt="Screen 3">
-        <img src="screenshots/hit-screen4.png" alt="Screen 4">
-      </div>
-    </section>
-
+    </div>
   </div>
+</section>
 
-  <div id="privacy-content"
-    style="display: none; max-width: 800px; margin: 0 auto; padding: 10rem 2rem; line-height: 1.8;">
-    <h1 style="font-family: 'Cinzel Decorative', serif; color: var(--accent); font-size: 2.5rem; margin-bottom: 2rem;">
-      Privacy Policy</h1>
-    <p><em>Last updated: April 2026</em></p>
+<div class="divider"></div>
 
-    <p>Lucky Pig Studio ("we", "us", or "our") operates the HIT 1000 mobile application. This page informs you of our
-      policies regarding the collection, use, and disclosure of personal data when you use our app.</p>
-
-    <h2 style="color: var(--accent); margin-top: 2rem;">Information Collection and Use</h2>
-    <p>HIT 1000 is designed to be a local, high-score based reflex game. We do not require you to provide any personally
-      identifiable information to use the app.</p>
-    <ul>
-      <li><strong>Game Data:</strong> Your high scores and progress are stored locally on your device. We do not store
-        this data on our servers.</li>
-      <li><strong>Log Data:</strong> In the event of an error, we may collect basic technical information (device type,
-        OS version) through third-party services to help us fix bugs.</li>
-    </ul>
-
-    <h2 style="color: var(--accent); margin-top: 2rem;">Contact Us</h2>
-    <p>If you have questions about this privacy policy, please contact us at: <a
-        href="mailto:support@luckypigstudio.com" style="color: var(--accent);">support@luckypigstudio.com</a></p>
-
-    <br>
-    <button onclick="showHome()"
-      style="background: var(--accent); color: #000; border: none; padding: 12px 24px; border-radius: 8px; font-weight: bold; cursor: pointer; text-transform: uppercase;">←
-      Back to App</button>
+<section class="how" id="how-to-play">
+  <div class="section-header">
+    <span class="section-tag">How It Works</span>
+    <h2 class="section-title">Simple. Fast. Addictive.</h2>
   </div>
+  <div class="how-steps">
+    <div class="step-card">
+      <div class="step-num">01</div>
+      <div class="step-title">Watch the number climb</div>
+      <p class="step-desc">The number starts at 0 and rises rapidly toward the target. Your job is to stop it at the right moment.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">02</div>
+      <div class="step-title">Tap to stop</div>
+      <p class="step-desc">One tap freezes the number. Land it as close to 1000 as possible — within 10 of the target to stay alive.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">03</div>
+      <div class="step-title">Target escalates</div>
+      <p class="step-desc">Hit the zone and the target jumps — 1000 becomes 2000, then 3000 and so on. The speed increases each round.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">04</div>
+      <div class="step-title">Beat your best</div>
+      <p class="step-desc">Track your highest score and highest number reached. Challenge yourself to go further every time.</p>
+    </div>
+  </div>
+</section>
 
-  <footer style="padding: 4rem 2rem; text-align: center; border-top: 1px solid rgba(255,255,255,0.1);">
-    <p>© 2026 Lucky Pig Studio. Made in Singapore 🇸🇬</p>
-  </footer>
+<div class="divider"></div>
 
-  <script>
-    function showPrivacy() {
-      document.getElementById('main-content').style.display = 'none';
-      document.getElementById('privacy-content').style.display = 'block';
-      window.scrollTo(0, 0);
-    }
+<section class="scoring" id="scoring">
+  <div class="section-header">
+    <span class="section-tag">Scoring System</span>
+    <h2 class="section-title">How Points Work</h2>
+  </div>
+  <div class="score-grid">
+    <div class="score-card good">
+      <div class="score-label">Good</div>
+      <div class="score-range">990–994 or 1006–1010</div>
+      <div class="score-points">+2</div>
+      <div class="score-pts-label">points</div>
+    </div>
+    <div class="score-card great">
+      <div class="score-label">Great</div>
+      <div class="score-range">995–999 or 1001–1005</div>
+      <div class="score-points">+5</div>
+      <div class="score-pts-label">points</div>
+    </div>
+    <div class="score-card perfect">
+      <div class="score-label">Perfect!</div>
+      <div class="score-range">Exactly 1000</div>
+      <div class="score-points">+10</div>
+      <div class="score-pts-label">points</div>
+    </div>
+  </div>
+</section>
 
-    function showHome() {
-      document.getElementById('main-content').style.display = 'block';
-      document.getElementById('privacy-content').style.display = 'none';
-      window.scrollTo(0, 0);
-    }
-  </script>
+<section class="screenshots" id="screenshots">
+  <div class="section-header">
+    <span class="section-tag">App Preview</span>
+    <h2 class="section-title">See It In Action</h2>
+  </div>
+  <div class="shots-row">
+    <div class="shot"><img src="screenshots/hit1.png" alt="HIT 1000 start" onerror="this.parentElement.style.cssText='background:rgba(124,58,237,0.2);min-height:350px;border-radius:24px'"/></div>
+    <div class="shot"><img src="screenshots/hit2.png" alt="HIT 1000 perfect" onerror="this.parentElement.style.cssText='background:rgba(232,77,135,0.2);min-height:350px;border-radius:24px'"/></div>
+    <div class="shot"><img src="screenshots/hit3.png" alt="HIT 1000 advancing" onerror="this.parentElement.style.cssText='background:rgba(13,148,136,0.2);min-height:350px;border-radius:24px'"/></div>
+    <div class="shot"><img src="screenshots/hit4.png" alt="HIT 1000 game over" onerror="this.parentElement.style.cssText='background:rgba(13,148,136,0.2);min-height:350px;border-radius:24px'"/></div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="cta-inner">
+    <h2 class="cta-title">Do you have what it takes?</h2>
+    <p class="cta-desc">One tap. The number won't wait. How far can you go before it gets away from you?</p>
+    <div class="dl-buttons" style="justify-content:center">
+      <a href="#" class="btn btn-purple btn-disabled">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76c.33.18.7.22 1.06.1l12.74-7.36-2.73-2.73-11.07 9.99zM.5 1.7C.19 2.03 0 2.53 0 3.17v17.66c0 .64.19 1.14.5 1.47l.08.08 9.9-9.9v-.23L.58 1.62.5 1.7zm19.1 10.85l-2.6-1.5-2.98 2.98 2.98 2.98 2.62-1.51c.75-.43.75-1.13-.02-1.56v.01zM4.24.14L16.98 7.5l-2.73 2.73L4.18.24C4.5.07 4.87.1 5.22.27l-1-.13z"/></svg>
+        Coming to Google Play
+      </a>
+      <a href="https://apps.apple.com/us/app/hit-1000/id1503987014" target="_blank" class="btn btn-teal">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98l-.09.06c-.22.14-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.77M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        Download on App Store
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">Lucky Pig Studio</div>
+      <p class="footer-brand-desc">Creating lucky, joyful apps for everyone, everywhere.</p>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Our Apps</div>
+      <ul>
+        <li><a href="index.html">BaoTio</a></li>
+        <li><a href="hit1000.html">HIT 1000</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Legal &amp; Support</div>
+      <ul>
+        <li><a href="index.html#privacy">Privacy Policy</a></li>
+        <li><a href="mailto:support@luckypigstudio.com">Support</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Lucky Pig Studio. All rights reserved.</p>
+  </div>
+</footer>
 
 </body>
-
 </html>
