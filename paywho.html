@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PayWho — Quick Split Bill | Lucky Pig Studio</title>
+  <meta name="description" content="PayWho splits bills in 3 simple steps. Add people, add bills, done. Perfect for dinners and group outings where different people paid for different things."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --amber: #F59E0B;
+      --amber-dark: #B45309;
+      --amber-light: #FCD34D;
+      --orange: #F97316;
+      --orange-dark: #C2410C;
+      --bg: #1a0e00;
+      --text: #fef3c7;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body {
+      font-family:'DM Sans',sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      overflow-x:hidden;
+    }
+    body::before {
+      content:'';
+      position:fixed;
+      inset:0;
+      background:
+        radial-gradient(ellipse 70% 50% at 15% 20%, rgba(245,158,11,0.1) 0%, transparent 55%),
+        radial-gradient(ellipse 60% 40% at 85% 80%, rgba(249,115,22,0.08) 0%, transparent 55%),
+        radial-gradient(ellipse 50% 35% at 50% 50%, rgba(245,158,11,0.05) 0%, transparent 60%);
+      pointer-events:none;
+      z-index:0;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position:fixed;
+      top:0;left:0;right:0;
+      z-index:200;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:1rem 2.5rem;
+      background:rgba(26,14,0,0.9);
+      backdrop-filter:blur(16px);
+      border-bottom:1px solid rgba(245,158,11,0.15);
+    }
+    .nav-logo {
+      font-family:'Cinzel Decorative',serif;
+      font-size:0.95rem;
+      color:var(--amber-light);
+      text-decoration:none;
+      display:flex;
+      align-items:center;
+      gap:0.4rem;
+    }
+    nav ul { list-style:none; display:flex; gap:0.25rem; align-items:center; }
+    nav ul li a {
+      color:rgba(254,243,199,0.6);
+      text-decoration:none;
+      font-size:0.85rem;
+      padding:0.4rem 0.85rem;
+      border-radius:8px;
+      transition:color 0.2s,background 0.2s;
+    }
+    nav ul li a:hover { color:#fff; background:rgba(245,158,11,0.1); }
+    nav ul li a.active {
+      color:var(--amber-light);
+      background:rgba(245,158,11,0.15);
+      font-weight:700;
+    }
+    .nav-support {
+      background:var(--amber) !important;
+      color:#1a0a00 !important;
+      font-weight:700 !important;
+      padding:0.4rem 1rem !important;
+    }
+    .nav-support:hover { background:var(--amber-light) !important; }
+
+    /* ── HERO ── */
+    .hero {
+      position:relative;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:7rem 2rem 4rem;
+      overflow:hidden;
+      z-index:1;
+    }
+    .hero-bg {
+      position:absolute;
+      inset:0;
+      background:radial-gradient(ellipse at 50% 0%, rgba(245,158,11,0.25) 0%, rgba(26,14,0,0.98) 70%);
+    }
+    .hero-inner {
+      position:relative;
+      z-index:2;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:4rem;
+      align-items:center;
+      max-width:1100px;
+      width:100%;
+    }
+    .hero-badge {
+      display:inline-flex;
+      align-items:center;
+      gap:0.4rem;
+      background:rgba(245,158,11,0.12);
+      border:1px solid rgba(245,158,11,0.3);
+      border-radius:100px;
+      padding:0.35rem 0.9rem;
+      font-size:0.72rem;
+      letter-spacing:0.14em;
+      text-transform:uppercase;
+      color:var(--amber-light);
+      margin-bottom:1.25rem;
+      opacity:0;
+      animation:fadeUp 0.8s 0.2s forwards;
+    }
+    .hero-title {
+      font-family:'Cinzel Decorative',serif;
+      font-size:clamp(2.8rem,5.5vw,4.5rem);
+      line-height:1;
+      color:var(--amber-light);
+      text-shadow:0 2px 24px rgba(245,158,11,0.3);
+      margin-bottom:0.4rem;
+      opacity:0;
+      animation:fadeUp 0.8s 0.3s forwards;
+    }
+    .hero-tagline {
+      font-size:1.2rem;
+      font-weight:500;
+      color:rgba(254,243,199,0.8);
+      margin-bottom:1.5rem;
+      opacity:0;
+      animation:fadeUp 0.8s 0.4s forwards;
+    }
+    .hero-tagline span { color:var(--amber); }
+    .hero-desc {
+      font-size:1rem;
+      line-height:1.8;
+      color:rgba(254,243,199,0.68);
+      max-width:460px;
+      margin-bottom:2.5rem;
+      opacity:0;
+      animation:fadeUp 0.8s 0.5s forwards;
+    }
+    .hero-desc strong { color:var(--amber-light); }
+    .dl-buttons {
+      display:flex;
+      gap:0.85rem;
+      flex-wrap:wrap;
+      opacity:0;
+      animation:fadeUp 0.8s 0.65s forwards;
+    }
+    .btn {
+      display:inline-flex;
+      align-items:center;
+      gap:0.5rem;
+      padding:0.85rem 1.6rem;
+      border-radius:12px;
+      text-decoration:none;
+      font-weight:700;
+      font-size:0.88rem;
+      letter-spacing:0.03em;
+      transition:transform 0.2s,box-shadow 0.2s,opacity 0.2s;
+    }
+    .btn:hover { transform:translateY(-2px); }
+    .btn svg { width:18px;height:18px;flex-shrink:0; }
+    .btn-amber {
+      background:linear-gradient(135deg,var(--amber),var(--orange));
+      color:#1a0a00;
+      box-shadow:0 4px 22px rgba(245,158,11,0.4);
+    }
+    .btn-amber:hover { box-shadow:0 8px 35px rgba(245,158,11,0.55); }
+    .btn-ghost {
+      background:rgba(245,158,11,0.08);
+      color:var(--amber-light);
+      border:1px solid rgba(245,158,11,0.28);
+    }
+    .btn-ghost:hover { background:rgba(245,158,11,0.14); }
+    .btn-disabled { opacity:0.38; cursor:not-allowed; pointer-events:none; }
+
+    /* ── PHONES ── */
+    .phones {
+      position:relative;
+      display:flex;
+      justify-content:center;
+      align-items:flex-end;
+      gap:0.75rem;
+      opacity:0;
+      animation:fadeUp 0.8s 0.4s forwards;
+    }
+    .phone { border-radius:30px; overflow:hidden; box-shadow:0 24px 55px rgba(0,0,0,0.6); flex-shrink:0; }
+    .phone img { width:100%;height:auto;display:block; }
+    .phone-main { width:185px; border:2px solid rgba(245,158,11,0.45); }
+    .phone-side { width:148px; opacity:0.6; }
+    .phone-left { transform:rotate(-7deg) translateY(18px); }
+    .phone-right { transform:rotate(7deg) translateY(18px); }
+
+    /* ── DIVIDER ── */
+    .divider {
+      height:1px;
+      background:linear-gradient(90deg,transparent,rgba(245,158,11,0.35),rgba(249,115,22,0.25),transparent);
+      position:relative;z-index:1;
+    }
+
+    /* ── HOW IT WORKS ── */
+    .how {
+      position:relative;z-index:1;
+      padding:6rem 2rem;
+      background:linear-gradient(180deg,rgba(26,14,0,0.7) 0%,rgba(30,12,0,0.9) 100%);
+    }
+    .section-header { text-align:center; margin-bottom:4rem; }
+    .section-tag {
+      font-size:0.68rem;
+      letter-spacing:0.32em;
+      text-transform:uppercase;
+      color:var(--amber);
+      margin-bottom:0.75rem;
+      display:block;
+      opacity:0.8;
+    }
+    .section-title {
+      font-family:'Cinzel Decorative',serif;
+      font-size:clamp(1.7rem,3vw,2.5rem);
+      color:var(--amber-light);
+    }
+    .steps {
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:2rem;
+      max-width:900px;
+      margin:0 auto;
+      position:relative;
+    }
+    .steps::before {
+      content:'';
+      position:absolute;
+      top:3.5rem;
+      left:calc(16.67% + 1rem);
+      right:calc(16.67% + 1rem);
+      height:2px;
+      background:linear-gradient(90deg,var(--amber),var(--orange),var(--amber));
+      opacity:0.3;
+      z-index:0;
+    }
+    .step-card {
+      background:rgba(245,158,11,0.05);
+      border:1px solid rgba(245,158,11,0.12);
+      border-radius:20px;
+      padding:2rem 1.5rem;
+      text-align:center;
+      position:relative;
+      z-index:1;
+      transition:transform 0.3s,background 0.3s;
+    }
+    .step-card:hover { transform:translateY(-4px); background:rgba(245,158,11,0.09); }
+    .step-num {
+      width:56px;height:56px;
+      border-radius:50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      margin:0 auto 1.25rem;
+      font-family:'Cinzel Decorative',serif;
+      font-size:1.4rem;
+      font-weight:700;
+    }
+    .step-card:nth-child(1) .step-num { background:rgba(245,158,11,0.15); color:var(--amber-light); border:2px solid rgba(245,158,11,0.4); }
+    .step-card:nth-child(2) .step-num { background:rgba(249,115,22,0.15); color:#fde68a; border:2px solid rgba(249,115,22,0.4); }
+    .step-card:nth-child(3) .step-num { background:rgba(245,158,11,0.2); color:var(--amber-light); border:2px solid var(--amber); box-shadow:0 0 20px rgba(245,158,11,0.25); }
+    .step-title { font-weight:700; font-size:1rem; color:#fff; margin-bottom:0.5rem; }
+    .step-desc { font-size:0.875rem; line-height:1.7; color:rgba(254,243,199,0.6); }
+
+    /* ── FEATURES ── */
+    .features {
+      position:relative;z-index:1;
+      padding:6rem 2rem;
+      background:rgba(0,0,0,0.2);
+    }
+    .features-grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+      gap:1.5rem;
+      max-width:1000px;
+      margin:0 auto;
+    }
+    .feat-card {
+      background:rgba(245,158,11,0.04);
+      border:1px solid rgba(245,158,11,0.1);
+      border-radius:18px;
+      padding:1.75rem;
+      position:relative;
+      overflow:hidden;
+      transition:transform 0.3s,background 0.3s;
+    }
+    .feat-card::after {
+      content:'';
+      position:absolute;
+      top:0;left:0;right:0;
+      height:2px;
+      background:linear-gradient(90deg,transparent,var(--amber),transparent);
+      opacity:0;
+      transition:opacity 0.3s;
+    }
+    .feat-card:hover { transform:translateY(-3px); background:rgba(245,158,11,0.07); }
+    .feat-card:hover::after { opacity:1; }
+    .feat-icon { font-size:1.75rem; margin-bottom:0.75rem; }
+    .feat-title { font-weight:700; font-size:0.95rem; color:#fff; margin-bottom:0.4rem; }
+    .feat-desc { font-size:0.875rem; line-height:1.7; color:rgba(254,243,199,0.6); }
+
+    /* ── SCREENSHOTS ── */
+    .screenshots {
+      position:relative;z-index:1;
+      padding:6rem 2rem;
+      background:linear-gradient(180deg,rgba(30,12,0,0.9) 0%,rgba(26,14,0,1) 100%);
+    }
+    .shots-row {
+      display:flex;
+      gap:1.25rem;
+      justify-content:center;
+      flex-wrap:wrap;
+      max-width:1000px;
+      margin:2.5rem auto 0;
+    }
+    .shot {
+      width:165px;
+      border-radius:22px;
+      overflow:hidden;
+      border:2px solid rgba(245,158,11,0.25);
+      box-shadow:0 10px 35px rgba(0,0,0,0.5);
+      transition:transform 0.3s,box-shadow 0.3s;
+      flex-shrink:0;
+    }
+    .shot:hover { transform:translateY(-7px) scale(1.02); box-shadow:0 20px 55px rgba(245,158,11,0.18); }
+    .shot img { width:100%;height:auto;display:block; }
+
+    /* ── CTA ── */
+    .cta {
+      position:relative;z-index:1;
+      padding:7rem 2rem;
+      text-align:center;
+      overflow:hidden;
+    }
+    .cta::before {
+      content:'';
+      position:absolute;
+      inset:0;
+      background:radial-gradient(ellipse 80% 60% at 50% 50%, rgba(245,158,11,0.08) 0%, transparent 65%);
+    }
+    .cta-inner { position:relative;z-index:1; }
+    .cta-title {
+      font-family:'Cinzel Decorative',serif;
+      font-size:clamp(1.7rem,4vw,2.8rem);
+      color:var(--amber-light);
+      margin-bottom:1rem;
+    }
+    .cta-desc {
+      font-size:1rem;
+      color:rgba(254,243,199,0.65);
+      max-width:460px;
+      margin:0 auto 2.5rem;
+      line-height:1.7;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      position:relative;z-index:1;
+      background:rgba(0,0,0,0.35);
+      border-top:1px solid rgba(245,158,11,0.1);
+      padding:3rem 2rem 2rem;
+    }
+    .footer-inner {
+      max-width:1100px;
+      margin:0 auto 2.5rem;
+      display:grid;
+      grid-template-columns:2fr 1fr 1fr;
+      gap:3rem;
+    }
+    .footer-brand { font-family:'Cinzel Decorative',serif; font-size:1rem; color:var(--amber-light); margin-bottom:0.6rem; }
+    .footer-brand-desc { font-size:0.83rem; color:rgba(254,243,199,0.4); line-height:1.7; max-width:260px; }
+    .footer-col-title { font-size:0.65rem; letter-spacing:0.25em; text-transform:uppercase; color:rgba(245,158,11,0.6); margin-bottom:1rem; }
+    .footer-col ul { list-style:none; }
+    .footer-col ul li { margin-bottom:0.45rem; }
+    .footer-col ul a { color:rgba(254,243,199,0.5); text-decoration:none; font-size:0.875rem; transition:color 0.2s; }
+    .footer-col ul a:hover { color:var(--amber-light); }
+    .footer-bottom {
+      max-width:1100px;
+      margin:0 auto;
+      padding-top:1.75rem;
+      border-top:1px solid rgba(245,158,11,0.08);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:1rem;
+    }
+    .footer-bottom p { font-size:0.78rem; color:rgba(254,243,199,0.28); }
+
+    @keyframes fadeUp { from{opacity:0;transform:translateY(22px)} to{opacity:1;transform:translateY(0)} }
+
+    @media(max-width:768px){
+      .hero-inner { grid-template-columns:1fr; text-align:center; gap:2.5rem; }
+      .hero-desc { margin:0 auto 2rem; }
+      .dl-buttons { justify-content:center; }
+      .phones { order:-1; }
+      .phone-side { display:none; }
+      .phone-main { width:220px; }
+      .steps { grid-template-columns:1fr; }
+      .steps::before { display:none; }
+      .footer-inner { grid-template-columns:1fr; gap:2rem; }
+      nav ul { display:none; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">🐷 Lucky Pig Studio</a>
+  <ul>
+    <li><a href="index.html">BaoTio</a></li>
+    <li><a href="hit1000.html">HIT 1000</a></li>
+    <li><a href="paywho.html" class="active">PayWho</a></li>
+    <li><a href="index.html#privacy">Privacy</a></li>
+    <li><a href="mailto:support@luckypigstudio.com" class="nav-support">Support</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge">💸 Bill Splitting · Singapore</div>
+      <h1 class="hero-title">PayWho</h1>
+      <p class="hero-tagline">Quick Split Bill.<br><span>Who pays who — sorted.</span></p>
+      <p class="hero-desc">Dinner's done. Now the mental gymnastics begin — Alice paid for food, Ben covered the cake, and David only joined for half the night. <strong>PayWho handles exactly this</strong>, in 3 taps.</p>
+      <div class="dl-buttons">
+        <a href="#" class="btn btn-amber btn-disabled">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76c.33.18.7.22 1.06.1l12.74-7.36-2.73-2.73-11.07 9.99zM.5 1.7C.19 2.03 0 2.53 0 3.17v17.66c0 .64.19 1.14.5 1.47l.08.08 9.9-9.9v-.23L.58 1.62.5 1.7zm19.1 10.85l-2.6-1.5-2.98 2.98 2.98 2.98 2.62-1.51c.75-.43.75-1.13-.02-1.56v.01zM4.24.14L16.98 7.5l-2.73 2.73L4.18.24C4.5.07 4.87.1 5.22.27l-1-.13z"/></svg>
+          Coming to Google Play
+        </a>
+        <a href="#" class="btn btn-ghost btn-disabled">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98l-.09.06c-.22.14-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.77M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+          Coming to App Store
+        </a>
+      </div>
+    </div>
+    <div class="phones">
+      <div class="phone phone-side phone-left">
+        <img src="screenshots/paywho1.png" alt="PayWho participants" onerror="this.parentElement.style.cssText='background:rgba(180,83,9,0.3);min-height:300px;border-radius:30px'"/>
+      </div>
+      <div class="phone phone-main">
+        <img src="screenshots/paywho4.png" alt="PayWho split result" onerror="this.parentElement.style.cssText='background:rgba(245,158,11,0.2);min-height:370px;border-radius:30px'"/>
+      </div>
+      <div class="phone phone-side phone-right">
+        <img src="screenshots/paywho2.png" alt="PayWho bills" onerror="this.parentElement.style.cssText='background:rgba(180,83,9,0.3);min-height:300px;border-radius:30px'"/>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="how" id="how-it-works">
+  <div class="section-header">
+    <span class="section-tag">How It Works</span>
+    <h2 class="section-title">3 Steps. Done.</h2>
+  </div>
+  <div class="steps">
+    <div class="step-card">
+      <div class="step-num">1</div>
+      <div class="step-title">Add Participants</div>
+      <p class="step-desc">Enter everyone's names — the people who were part of the outing, regardless of what they shared.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">2</div>
+      <div class="step-title">Add the Bills</div>
+      <p class="step-desc">For each bill: enter the amount, who paid, and who's splitting it. Different bills can have different people.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">3</div>
+      <div class="step-title">PayWho</div>
+      <p class="step-desc">Tap Split Bill. PayWho calculates the simplest set of transactions — exactly who pays who, and how much.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="features" id="features">
+  <div class="section-header">
+    <span class="section-tag">Why PayWho</span>
+    <h2 class="section-title">Built for Real Situations</h2>
+  </div>
+  <div class="features-grid">
+    <div class="feat-card">
+      <div class="feat-icon">🍽️</div>
+      <div class="feat-title">Multiple bills, multiple payers</div>
+      <p class="feat-desc">Alice paid for dinner, Ben got the cake, Claire ordered drinks. PayWho handles it all in one go.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">👥</div>
+      <div class="feat-title">Custom participants per bill</div>
+      <p class="feat-desc">David skipped the cake? No problem — just uncheck him from that bill. Each bill has its own participant list.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">⚡</div>
+      <div class="feat-title">Instant results</div>
+      <p class="feat-desc">No spreadsheets. No mental arithmetic. Hit Split Bill and the answer is right there — who pays who, down to the cent.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">🔒</div>
+      <div class="feat-title">No login. No account.</div>
+      <p class="feat-desc">Open the app, split the bill, close the app. Nothing stored in the cloud. Nothing to sign up for.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">🆓</div>
+      <div class="feat-title">Completely free</div>
+      <p class="feat-desc">No in-app purchases. No premium tier. PayWho is free to use, always.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">📱</div>
+      <div class="feat-title">Works offline</div>
+      <p class="feat-desc">No internet connection needed. Use it at the restaurant, at the chalet, anywhere — it just works.</p>
+    </div>
+  </div>
+</section>
+
+<section class="screenshots" id="screenshots">
+  <div class="section-header">
+    <span class="section-tag">App Preview</span>
+    <h2 class="section-title">See It In Action</h2>
+  </div>
+  <div class="shots-row">
+    <div class="shot"><img src="screenshots/paywho1.png" alt="Add participants" onerror="this.parentElement.style.cssText='background:rgba(180,83,9,0.25);min-height:340px;border-radius:22px'"/></div>
+    <div class="shot"><img src="screenshots/paywho2.png" alt="Bills list" onerror="this.parentElement.style.cssText='background:rgba(180,83,9,0.25);min-height:340px;border-radius:22px'"/></div>
+    <div class="shot"><img src="screenshots/paywho3.png" alt="Add bill" onerror="this.parentElement.style.cssText='background:rgba(180,83,9,0.25);min-height:340px;border-radius:22px'"/></div>
+    <div class="shot"><img src="screenshots/paywho4.png" alt="Split result" onerror="this.parentElement.style.cssText='background:rgba(245,158,11,0.2);min-height:340px;border-radius:22px'"/></div>
+    <div class="shot"><img src="screenshots/paywho5.png" alt="Select participants" onerror="this.parentElement.style.cssText='background:rgba(180,83,9,0.25);min-height:340px;border-radius:22px'"/></div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="cta-inner">
+    <h2 class="cta-title">Settle up in seconds.</h2>
+    <p class="cta-desc">No more awkward "so how much do I owe?" moments. PayWho — a nod to PayLah and PayNow, because it tells you exactly who to pay.</p>
+    <div class="dl-buttons" style="justify-content:center">
+      <a href="#" class="btn btn-amber btn-disabled">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76c.33.18.7.22 1.06.1l12.74-7.36-2.73-2.73-11.07 9.99zM.5 1.7C.19 2.03 0 2.53 0 3.17v17.66c0 .64.19 1.14.5 1.47l.08.08 9.9-9.9v-.23L.58 1.62.5 1.7zm19.1 10.85l-2.6-1.5-2.98 2.98 2.98 2.98 2.62-1.51c.75-.43.75-1.13-.02-1.56v.01zM4.24.14L16.98 7.5l-2.73 2.73L4.18.24C4.5.07 4.87.1 5.22.27l-1-.13z"/></svg>
+        Coming to Google Play
+      </a>
+      <a href="#" class="btn btn-ghost btn-disabled">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98l-.09.06c-.22.14-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.77M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        Coming to App Store
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">🐷 Lucky Pig Studio</div>
+      <p class="footer-brand-desc">Building lucky, joyful apps for Singapore and Southeast Asia.</p>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Our Apps</div>
+      <ul>
+        <li><a href="index.html">BaoTio</a></li>
+        <li><a href="hit1000.html">HIT 1000</a></li>
+        <li><a href="paywho.html">PayWho</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Legal &amp; Support</div>
+      <ul>
+        <li><a href="index.html#privacy">Privacy Policy</a></li>
+        <li><a href="mailto:support@luckypigstudio.com">Support</a></li>
+        <li><a href="mailto:contact@luckypigstudio.com">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Lucky Pig Studio. All rights reserved.</p>
+    <p>Made with 🐷 &amp; ❤️ in Singapore</p>
+  </div>
+</footer>
+
+</body>
+</html>
