@@ -686,7 +686,7 @@
         gap: 2rem;
       }
 
-      nav ul { display: none !important; }
+      nav ul { display: none; }
       .nav-hamburger { display: flex !important; }
       .mobile-menu.open { display: flex !important; }
     }
@@ -1060,4 +1060,15 @@
     });
     window.addEventListener('popstate', function () {
       if (window.location.hash === '#privacy') {
-        document.getElementById('main-content').style.display =
+        document.getElementById('main-content').style.display = 'none';
+        document.getElementById('privacy-content').style.display = 'block';
+        window.scrollTo(0, 0);
+      } else {
+        document.getElementById('main-content').style.display = 'block';
+        document.getElementById('privacy-content').style.display = 'none';
+        window.scrollTo(0, 0);
+      }
+    });
+  </script>
+</body>
+</html>
