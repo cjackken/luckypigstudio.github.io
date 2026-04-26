@@ -795,9 +795,67 @@
         gap: 2rem;
       }
 
-      nav ul {
-        display: none;
-      }
+      /* nav handled by hamburger */
+    }
+  </style>
+
+  <style>
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      z-index: 201;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: #c084fc;
+      border-radius: 2px;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 57px;
+      left: 0; right: 0;
+      z-index: 199;
+      flex-direction: column;
+      background: rgba(14,8,22,0.97);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(168,85,247,0.15);
+      padding: 0.5rem 0;
+    }
+    .mobile-menu a {
+      color: rgba(240,234,255,0.7);
+      text-decoration: none;
+      font-size: 1rem;
+      padding: 0.9rem 2rem;
+      border-bottom: 1px solid rgba(168,85,247,0.07);
+      transition: background 0.2s, color 0.2s;
+    }
+    .mobile-menu a:hover, .mobile-menu a.active { color: #c084fc; background: rgba(168,85,247,0.06); }
+    .mobile-menu .mobile-support {
+      margin: 0.75rem 1.5rem;
+      padding: 0.75rem 1rem;
+      background: linear-gradient(135deg,#7c3aed,#db2777);
+      color: #fff !important;
+      font-weight: 700;
+      border-radius: 10px;
+      text-align: center;
+      border-bottom: none;
+    }
+    @media(max-width:768px) {
+      .nav-hamburger { display: flex; }
+      .mobile-menu.open { display: flex; }
     }
   </style>
 </head>
@@ -813,7 +871,17 @@
       <li><a href="index.html#privacy" onclick="sessionStorage.setItem('goPrivacy','1')">Privacy</a></li>
       <li><a href="mailto:support@luckypigstudio.com" class="nav-support">Support</a></li>
     </ul>
+    <button class="nav-hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html">BaoTio</a>
+    <a href="hit1000.html" class="active">HIT 1000</a>
+    <a href="paywho.html">PayWho</a>
+    <a href="index.html#privacy">Privacy</a>
+    <a href="mailto:support@luckypigstudio.com" class="mobile-support">Support</a>
+  </div>
 
   <section class="hero">
     <div class="orb orb-1"></div>
@@ -991,10 +1059,12 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <p>© 2026 Lucky Pig Studio. All rights reserved.</p>
-    </div>
-  </footer>
+  <script>
+    function toggleMenu() {
+      var menu = document.getElementById("mobileMenu");
+      var btn = document.getElementById("hamburger");
+      menu.classList.toggle("open");
+      btn.classList.toggle("open");
+    }
+  </script>
 
-</body>
-
-</html>

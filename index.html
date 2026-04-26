@@ -686,9 +686,67 @@
         gap: 2rem;
       }
 
-      nav ul {
-        display: none;
-      }
+      /* nav handled by hamburger */
+    }
+  </style>
+
+  <style>
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      z-index: 201;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: #FFD700;
+      border-radius: 2px;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 57px;
+      left: 0; right: 0;
+      z-index: 199;
+      flex-direction: column;
+      background: rgba(80,0,0,0.97);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255,215,0,0.15);
+      padding: 0.5rem 0;
+    }
+    .mobile-menu a {
+      color: rgba(255,248,231,0.75);
+      text-decoration: none;
+      font-size: 1rem;
+      padding: 0.9rem 2rem;
+      border-bottom: 1px solid rgba(255,215,0,0.07);
+      transition: background 0.2s, color 0.2s;
+    }
+    .mobile-menu a:hover, .mobile-menu a.active { color: #FFD700; background: rgba(255,215,0,0.06); }
+    .mobile-menu .mobile-support {
+      margin: 0.75rem 1.5rem;
+      padding: 0.75rem 1rem;
+      background: #FFD700;
+      color: #1a0a00 !important;
+      font-weight: 700;
+      border-radius: 10px;
+      text-align: center;
+      border-bottom: none;
+    }
+    @media(max-width:768px) {
+      .nav-hamburger { display: flex; }
+      .mobile-menu.open { display: flex; }
     }
   </style>
 </head>
@@ -704,7 +762,17 @@
       <li><a href="#" onclick="showPrivacy();return false;">Privacy</a></li>
       <li><a href="mailto:support@luckypigstudio.com" class="nav-support">Support</a></li>
     </ul>
+    <button class="nav-hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html" class="active">BaoTio</a>
+    <a href="hit1000.html">HIT 1000</a>
+    <a href="paywho.html">PayWho</a>
+    <a href="#" onclick="showPrivacy();toggleMenu();return false;">Privacy</a>
+    <a href="mailto:support@luckypigstudio.com" class="mobile-support">Support</a>
+  </div>
 
   <div id="main-content">
 
@@ -917,7 +985,7 @@
           <div class="footer-col-title">Legal &amp; Support</div>
           <ul>
             <li><a href="#" onclick="showPrivacy();return false;">Privacy Policy</a></li>
-            <li><a href="mailto:support@luckypigstudio.com">Support</a></li>
+            <li><a href="/cdn-cgi/l/email-protection#0774727777687573476b72646c7e776e60747372636e682964686a">Support</a></li>
           </ul>
         </div>
       </div>
@@ -960,13 +1028,19 @@
     <p>We may update this privacy policy from time to time. We will notify you of changes by updating the date at the
       top of this page.</p>
     <h2>Contact Us</h2>
-    <p>Questions? Contact us at <a href="mailto:support@luckypigstudio.com">support@luckypigstudio.com</a></p>
+    <p>Questions? Contact us at <a href="/cdn-cgi/l/email-protection#295a5c5959465b5d69455c4a425059404e5a5d5c4d4046074a4644"><span class="__cf_email__" data-cfemail="f5868085859a8781b59980969e8c859c92868180919c9adb969a98">[email&#160;protected]</span></a></p>
     <br>
     <a href="#" onclick="showHome();return false;" style="color:var(--gold);text-decoration:none;">← Back to Home</a>
   </div>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
   <script>
+    function toggleMenu() {
+      var menu = document.getElementById("mobileMenu");
+      var btn = document.getElementById("hamburger");
+      menu.classList.toggle("open");
+      btn.classList.toggle("open");
+    }
     function showPrivacy() {
       document.getElementById('main-content').style.display = 'none';
       document.getElementById('privacy-content').style.display = 'block';
@@ -987,16 +1061,4 @@
     });
     window.addEventListener('popstate', function () {
       if (window.location.hash === '#privacy') {
-        document.getElementById('main-content').style.display = 'none';
-        document.getElementById('privacy-content').style.display = 'block';
-        window.scrollTo(0, 0);
-      } else {
-        document.getElementById('main-content').style.display = 'block';
-        document.getElementById('privacy-content').style.display = 'none';
-        window.scrollTo(0, 0);
-      }
-    });
-  </script>
-</body>
-
-</html>
+        document.getElementById('main-content').style.display =
