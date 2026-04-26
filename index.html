@@ -686,7 +686,7 @@
         gap: 2rem;
       }
 
-      nav ul { display: none; }
+      nav ul { display: none !important; }
       .nav-hamburger { display: flex !important; }
       .mobile-menu.open { display: flex !important; }
     }
@@ -1033,7 +1033,6 @@
     <a href="#" onclick="showHome();return false;" style="color:var(--gold);text-decoration:none;">← Back to Home</a>
   </div>
 
-  <script>
   <script>
     function toggleMenu() {
       var menu = document.getElementById('mobileMenu');
