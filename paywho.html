@@ -684,9 +684,9 @@
         gap: 2rem;
       }
 
-      nav ul {
-        display: none;
-      }
+      nav ul { display: none; }
+      .nav-hamburger { display: flex !important; }
+      .mobile-menu.open { display: flex !important; }
     }
   </style>
 
@@ -700,7 +700,7 @@
       border: none;
       cursor: pointer;
       padding: 4px;
-      z-index: 201;
+      z-index: 300;
     }
     .nav-hamburger span {
       display: block;
@@ -722,31 +722,29 @@
       flex-direction: column;
       background: rgba(26,14,0,0.97);
       backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(245,158,11,0.15);
+      border-bottom: 1px solid rgba(245,158,11,0.12);
       padding: 0.5rem 0;
     }
     .mobile-menu a {
-      color: rgba(254,243,199,0.7);
+      color: rgba(254,243,199,0.8);
       text-decoration: none;
       font-size: 1rem;
       padding: 0.9rem 2rem;
-      border-bottom: 1px solid rgba(245,158,11,0.07);
+      border-bottom: 1px solid rgba(245,158,11,0.12);
       transition: background 0.2s, color 0.2s;
+      display: block;
     }
-    .mobile-menu a:hover, .mobile-menu a.active { color: #FCD34D; background: rgba(245,158,11,0.06); }
+    .mobile-menu a:hover, .mobile-menu a.active { color: #FCD34D; background: rgba(245,158,11,0.08); }
     .mobile-menu .mobile-support {
       margin: 0.75rem 1.5rem;
       padding: 0.75rem 1rem;
       background: linear-gradient(135deg,#F59E0B,#F97316);
-      color: #1a0a00 !important;
+      color: #fff !important;
       font-weight: 700;
       border-radius: 10px;
       text-align: center;
       border-bottom: none;
-    }
-    @media(max-width:768px) {
-      .nav-hamburger { display: flex; }
-      .mobile-menu.open { display: flex; }
+      display: block;
     }
   </style>
 </head>
@@ -762,7 +760,17 @@
       <li><a href="index.html#privacy">Privacy</a></li>
       <li><a href="mailto:support@luckypigstudio.com" class="nav-support">Support</a></li>
     </ul>
+    <button class="nav-hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html">BaoTio</a>
+    <a href="hit1000.html">HIT 1000</a>
+    <a href="paywho.html" class="active">PayWho</a>
+    <a href="index.html#privacy">Privacy</a>
+    <a href="mailto:support@luckypigstudio.com" class="mobile-support">Support</a>
+  </div>
 
   <section class="hero">
     <div class="hero-bg"></div>
@@ -955,10 +963,10 @@
     <div class="footer-bottom">
   <script>
     function toggleMenu() {
-      var menu = document.getElementById("mobileMenu");
-      var btn = document.getElementById("hamburger");
-      menu.classList.toggle("open");
-      btn.classList.toggle("open");
+      var menu = document.getElementById('mobileMenu');
+      var btn = document.getElementById('hamburger');
+      menu.classList.toggle('open');
+      btn.classList.toggle('open');
     }
   </script>
 
